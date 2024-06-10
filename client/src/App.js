@@ -1,30 +1,36 @@
-import React, { useEffect, useState } from 'react';
-import axios from 'axios';
-import './App.css';
-import AddGolfCourse from './Components/AddGolfCourse';  
+import React from 'react';
+import { BrowserRouter as Router, Route, Routes, Navigate } from 'react-router-dom';
+import Navbar from './Components/Navbar';
+import Home from './Components/Home';
+import Register from './Components/Register'; // Import the Register component
+import SignIn from './Components/SignIn';
+import { auth } from './firebaseConfig';
+import { useAuthState } from 'react-firebase-hooks/auth';
 
-function App() {
-  const [golfCourses, setGolfCourses] = useState([]);
+const App = () => {
+    const [user] = useAuthState(auth);
 
-  useEffect(() => {
-    axios.get('/api/golf-courses')
-      .then(response => setGolfCourses(response.data))
-      .catch(error => console.error('Error fetching data:', error));
-  }, []);
-
-  return (
-    <div className="App">
-      <header className="App-header">
-        <h1>Golf Courses</h1>
-        <AddGolfCourse />  {/* Include the form for adding new golf courses */}
-        <ul>
-          {golfCourses.map(course => (
-            <li key={course._id}>{course.name} - {course.location} ({course.holes} holes)</li>
-          ))}
-        </ul>
-      </header>
-    </div>
-  );
-}
+    return (
+        <Router>
+            <div>
+                <Navbar />
+                <Routes>
+                    <Route
+                        path="/login"
+                        element={<SignIn />}
+                    />
+                    <Route
+                        path="/register"
+                        element={<Register />}
+                    />
+                    <Route
+                        path="/"
+                        element={user ? <Home /> : <Navigate to="/login" />}
+                    />
+                </Routes>
+            </div>
+        </Router>
+    );
+};
 
 export default App;
