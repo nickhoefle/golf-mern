@@ -11,3 +11,49 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+body {
+  background-image: url(./Assets/images/golf-course.jpg);
+  background-size: cover; 
+  background-position: center bottom; 
+  background-repeat: no-repeat;
+  height: 100vh;
+}
+
+.sign-in-wrapper {
+  background-color: white;
+  display: flex;
+  flex-direction: column;
+  padding: 20px 75px 30px 75px;
+  border-radius: 5px;
+  outline: 5px solid black;
+  position: absolute;
+  top: 20%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 25vw;
+}
+
+.sign-in-wrapper button {
+  background-color: #44d16c;
+  width: 100%;
+  margin-top: 20px;
+  border-radius: 5px;
+  color: black;
+  font-weight: bold;
+  font-size: 18px;
+  border: 2px solid black;
+  padding: 5px;
+}
+
+.sign-in-wrapper input {
+  font-size: 18px;
+  border: 2px solid black;
+  border-radius: 5px;
+  padding: 5px;
+}
+
+.sign-in-wrapper label {
+  font-size: 18px;
+  font-weight: bold;
+}

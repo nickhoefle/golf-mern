@@ -5,42 +5,42 @@ import { useLocation } from 'react-router-dom';
 
 
 const Navbar = () => {
-  const [user, setUser] = useState(null);
-  const location = useLocation();
+    const [user, setUser] = useState(null);
+    const location = useLocation();
 
-  useEffect(() => {
-    const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
-      setUser(currentUser);
-    });
+    useEffect(() => {
+        const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
+            setUser(currentUser);
+        });
 
-    return () => unsubscribe();
-  }, []);
+        return () => unsubscribe();
+    }, []);
 
-  const handleSignOut = async () => {
-    try {
-      await signOut(auth);
-    } catch (error) {
-      console.error('Error signing out:', error);
-    }
-  };
+    const handleSignOut = async () => {
+        try {
+        await signOut(auth);
+        } catch (error) {
+        console.error('Error signing out:', error);
+        }
+    };
 
-  if (location.pathname === '/login') return null;
+    if (location.pathname === '/login') return null;
 
-  return (
-    <nav>
-      <h1>My Application</h1>
-      <div>
-        {user ? (
-          <>
-            <span>{user.email}</span>
-            <button onClick={handleSignOut}>Sign Out</button>
-          </>
-        ) : (
-          <span>Not logged in</span>
-        )}
-      </div>
-    </nav>
-  );
+    return (
+        <nav>
+            <h1>My Application</h1>
+            <div>
+                {user ? (
+                <>
+                    <span>{user.email}</span>
+                    <button onClick={handleSignOut}>Sign Out</button>
+                </>
+                ) : (
+                <span>Not logged in</span>
+                )}
+            </div>
+        </nav>
+    );
 };
 
 export default Navbar;

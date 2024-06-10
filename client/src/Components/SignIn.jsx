@@ -19,17 +19,17 @@ const SignIn = () => {
     };
 
     return (
-        <div>
+        <div className='sign-in-wrapper'>
             <h1>Sign In</h1>
+            <label>Email</label>
             <input
                 type="email"
-                placeholder="Email"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
             />
+            <label>Password</label>
             <input
                 type="password"
-                placeholder="Password"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
             />

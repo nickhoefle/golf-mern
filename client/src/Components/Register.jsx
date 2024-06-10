@@ -1,8 +1,6 @@
 import React, { useState } from 'react';
-import { auth, db } from '../firebaseConfig';
+import { auth } from '../firebaseConfig';
 import { createUserWithEmailAndPassword } from 'firebase/auth';
-import { collection, doc, setDoc } from 'firebase/firestore';
-import { useNavigate } from 'react-router-dom';
 
 const Register = () => {
     const [email, setEmail] = useState('');
@@ -11,9 +9,7 @@ const Register = () => {
     const signUp = async () => {
         try {
             const userCredential = await createUserWithEmailAndPassword(auth, email, password);
-            // Log the authenticated user's information
             console.log('User signed up successfully:', userCredential.user);
-            // Redirect to the index page
             window.location.href = '/';
         } catch (error) {
             console.error('Error signing up:', error);

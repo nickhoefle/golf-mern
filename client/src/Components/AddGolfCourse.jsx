@@ -11,14 +11,14 @@ function AddGolfCourse() {
         const newGolfCourse = { name, location, holes: parseInt(holes) };
 
         try {
-        const response = await axios.post('/api/golf-courses', newGolfCourse);
-        console.log(response.data);
-        // Clear form fields
-        setName('');
-        setLocation('');
-        setHoles('');
+            const response = await axios.post('/api/golf-courses', newGolfCourse);
+            console.log(response.data);
+            // Clear form fields
+            setName('');
+            setLocation('');
+            setHoles('');
         } catch (error) {
-        console.error('There was an error adding the golf course!', error);
+            console.error('There was an error adding the golf course!', error);
         }
 };
 
