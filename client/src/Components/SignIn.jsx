@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { auth } from '../firebaseConfig';
 import { signInWithEmailAndPassword } from 'firebase/auth';
 import { useNavigate } from 'react-router-dom';
+import PageTitle from './PageTitle';
 
 const SignIn = () => {
     const [email, setEmail] = useState('');
@@ -19,22 +20,25 @@ const SignIn = () => {
     };
 
     return (
-        <div className='sign-in-wrapper'>
-            <h1>Sign In</h1>
-            <label>Email</label>
-            <input
-                type="email"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-            />
-            <label>Password</label>
-            <input
-                type="password"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-            />
-            <button onClick={signIn}>Sign In</button>
-        </div>
+        <>
+            <PageTitle />
+            <div className='sign-in-wrapper'>
+                <h1>Sign In</h1>
+                <label>Email</label>
+                <input
+                    type="email"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                />
+                <label>Password</label>
+                <input
+                    type="password"
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
+                />
+                <button onClick={signIn}>Sign In</button>
+            </div>
+        </>
     );
 };
 

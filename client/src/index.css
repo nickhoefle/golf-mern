@@ -20,6 +20,15 @@ body {
   height: 100vh;
 }
 
+.page-title-wrapper {
+  position: absolute;
+  top: 0;
+  width: 100%;
+  text-align: center;
+  background-color: white;
+  border-bottom: 5px solid black;
+}
+
 .sign-in-wrapper {
   background-color: white;
   display: flex;
@@ -28,7 +37,7 @@ body {
   border-radius: 5px;
   outline: 5px solid black;
   position: absolute;
-  top: 20%;
+  top: 40vh;
   left: 50%;
   transform: translate(-50%, -50%);
   width: 25vw;
@@ -44,6 +53,10 @@ body {
   font-size: 18px;
   border: 2px solid black;
   padding: 5px;
+}
+
+.sign-in-wrapper h1 {
+  text-align: center;
 }
 
 .sign-in-wrapper input {
