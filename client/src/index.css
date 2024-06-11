@@ -86,6 +86,11 @@ body {
   font-size: 18px;
   border: 2px solid black;
   padding: 5px;
+  cursor: pointer;
+}
+
+.sign-in-wrapper button:hover {
+  background-color: #38ae5a;
 }
 
 .sign-in-wrapper h1 {
