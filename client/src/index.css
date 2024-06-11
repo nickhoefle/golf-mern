@@ -20,6 +20,39 @@ body {
   height: 100vh;
 }
 
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  background-color: white;
+  padding: 10px;
+  border-bottom: 5px solid black;
+}
+
+.navbar button {
+  padding: 4px;
+  margin-left: 5px;
+  font-weight: bold;
+  border-radius: 5px;
+  background-color: #f78282;
+  color: black;
+  cursor: pointer;
+  font-size: 15px;
+}
+
+.navbar button:hover {
+  background-color: #d46f6f;
+}
+
+.navbar-email {
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.navbar-page-title {
+  font-size: 24px;
+  font-weight: bold;
+}
+
 .page-title-wrapper {
   position: absolute;
   top: 0;

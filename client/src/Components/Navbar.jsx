@@ -27,18 +27,16 @@ const Navbar = () => {
     if (location.pathname === '/login') return null;
 
     return (
-        <nav>
-            <h1>My Application</h1>
-            <div>
+        <nav className='navbar'>
+                <span className='navbar-page-title'>Nick Hoefle and Associates Golf</span>
                 {user ? (
-                <>
-                    <span>{user.email}</span>
+                <div>
+                    <span className='navbar-email'>{user.email}</span>
                     <button onClick={handleSignOut}>Sign Out</button>
-                </>
+                </div>
                 ) : (
                 <span>Not logged in</span>
                 )}
-            </div>
         </nav>
     );
 };
