@@ -97,7 +97,10 @@ function AddGolfCourse() {
                 )}
                 {Array.from({ length: amountOfTeeBoxes }).map((_, index) => (
                     <div className='tee-box-form-wrapper'>
-                        <div key={index} style={{ margin: '10px 0' }}>
+                        <div 
+                            key={index} 
+                            style={{ margin: '10px 0' }}
+                        >
                             <label>Tee Box {index + 1} Color:</label><br />
                             <select
                                 value={teeBoxDetails[index]?.color || ''}
