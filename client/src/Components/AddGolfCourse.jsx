@@ -5,6 +5,7 @@ function AddGolfCourse() {
     const [name, setName] = useState('');
     const [location, setLocation] = useState('');
     const [holes, setHoles] = useState('');
+    const [pars, setPars] = useState('');
     const [amountOfTeeBoxes, setAmountOfTeeBoxes] = useState('');
     const [teeBoxDetails, setTeeBoxDetails] = useState([]);
 
@@ -14,6 +15,7 @@ function AddGolfCourse() {
             name,
             location,
             holes: parseInt(holes),
+            pars: pars.map(par => parseInt(par)),
             teeBoxes: teeBoxDetails.map(box => ({
                 color: box.color,
                 yardages: box.yardages.map(yardage => parseInt(yardage))
@@ -25,6 +27,7 @@ function AddGolfCourse() {
             setName('');
             setLocation('');
             setHoles('');
+            setPars([]);
             setAmountOfTeeBoxes('');
             setTeeBoxDetails([]);
         } catch (error) {
@@ -55,6 +58,12 @@ function AddGolfCourse() {
         });
     };
 
+    const handleParsChange = (holeIndex, value) => {
+        const updatedPars = [...pars];
+        updatedPars[holeIndex] = value;
+        setPars(updatedPars);
+    };
+
     return (
         <div className='add-golf-course-wrapper'>
             <form onSubmit={handleSubmit}>
@@ -82,6 +91,19 @@ function AddGolfCourse() {
                 </select>
                 {holes && (
                     <>
+                        <label>Pars:</label>
+                        {Array.from({ length: parseInt(holes) }).map((_, holeIndex) => (
+                            <div key={holeIndex} style={{ margin: '5px 0' }}>
+                                <label style={{ marginRight: holeIndex < 9 ? '20px' : '6px' }}>
+                                    Hole {holeIndex + 1} Par:
+                                </label>
+                                <input
+                                    type="number"
+                                    value={pars[holeIndex] || ''}
+                                    onChange={(e) => handleParsChange(holeIndex, e.target.value)}
+                                />
+                            </div>
+                        ))}
                         <label>Tee Boxes:</label>
                         <select
                             value={amountOfTeeBoxes}

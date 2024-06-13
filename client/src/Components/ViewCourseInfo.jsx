@@ -44,25 +44,29 @@ const ViewScoreCard = () => {
                     <p>{selectedCourse.location}</p>
                     <div>
                         <table className='scorecard-table'>
-                            <tbody>
-                                <tr>
-                                    <th>Hole</th>
-                                    {Array.from({ length: selectedCourse.holes }).map((_, index) => (
-                                        <th>{index + 1}</th>
+                            <tr>
+                                <th>Hole</th>
+                                {Array.from({ length: selectedCourse.holes }).map((_, index) => (
+                                    <th>{index + 1}</th>
+                                ))}
+                            </tr>
+                            <tr>
+                                <td>Par:</td>
+                                {selectedCourse.pars.map((par) => (
+                                    <td>{par}</td>
+                                ))}
+                            </tr>
+                            {selectedCourse.teeBoxes.map((teeBox) => (
+                                <tr 
+                                    key={teeBox._id}
+                                    style={{ backgroundColor: teeBox.color }}
+                                >
+                                    <td>{teeBox.color} Tees</td>
+                                    {teeBox.yardages.map((yardage, index) => (
+                                        <td key={index}>{yardage}</td>
                                     ))}
                                 </tr>
-                                {selectedCourse.teeBoxes.map((teeBox) => (
-                                    <tr 
-                                        key={teeBox._id}
-                                        style={{ backgroundColor: teeBox.color }}
-                                    >
-                                        <td>{teeBox.color} Tees</td>
-                                        {teeBox.yardages.map((yardage, index) => (
-                                            <td key={index}>{yardage}</td>
-                                        ))}
-                                    </tr>
-                                ))}
-                            </tbody>
+                            ))}
                         </table>
                     </div>
                 </div>
