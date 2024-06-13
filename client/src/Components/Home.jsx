@@ -1,11 +1,11 @@
 import React from 'react';
-import AddGolfCourse from '../Components/AddGolfCourse';
 
 const Home = () => {
     return (
         <div>
-            <h1>Welcome to the Home Page!</h1>
-            <AddGolfCourse />
+            <div style={{width: '75%', backgroundColor: 'white'}}>
+                <h1>Main Block</h1>
+            </div>
         </div>
     );
 };

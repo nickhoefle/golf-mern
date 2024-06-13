@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import axios from 'axios';
 
 function AddGolfCourse() {
@@ -7,12 +7,6 @@ function AddGolfCourse() {
     const [holes, setHoles] = useState('');
     const [amountOfTeeBoxes, setAmountOfTeeBoxes] = useState('');
     const [teeBoxDetails, setTeeBoxDetails] = useState([]);
-
-    //Reset teeBox data when # of hole changes
-    useEffect(() => {
-        setTeeBoxDetails([]);
-        setAmountOfTeeBoxes('');
-    }, [holes]);
 
     const handleSubmit = async (event) => {
         event.preventDefault();
@@ -25,7 +19,7 @@ function AddGolfCourse() {
                 yardages: box.yardages.map(yardage => parseInt(yardage))
             }))
         };
-    
+
         try {
             await axios.post('/api/golf-courses', newGolfCourse);
             setName('');
@@ -41,7 +35,7 @@ function AddGolfCourse() {
     const handleTeeBoxesChange = (e) => {
         const numTeeBoxes = parseInt(e.target.value);
         setAmountOfTeeBoxes(numTeeBoxes);
-        const initialTeeBoxDetails = Array(numTeeBoxes).fill().map(() => ({
+        const initialTeeBoxDetails = Array.from({ length: numTeeBoxes }, () => ({
             color: '',
             yardages: Array(parseInt(holes)).fill('')
         }));
@@ -49,35 +43,34 @@ function AddGolfCourse() {
     };
 
     const handleTeeBoxDetailChange = (index, field, value) => {
-        const updatedTeeBoxDetails = [...teeBoxDetails];
-        if (field === 'color') {
-            updatedTeeBoxDetails[index].color = value;
-        } else {
-            const yardageIndex = parseInt(field);
-            updatedTeeBoxDetails[index].yardages[yardageIndex] = value;
-        }
-        setTeeBoxDetails(updatedTeeBoxDetails);
+        setTeeBoxDetails(prevDetails => {
+            const updatedDetails = [...prevDetails];
+            if (field === 'color') {
+                updatedDetails[index].color = value;
+            } else {
+                const yardageIndex = parseInt(field);
+                updatedDetails[index].yardages[yardageIndex] = value;
+            }
+            return updatedDetails;
+        });
     };
-    
+
     return (
-        <form onSubmit={handleSubmit}>
-            <div>
+        <div className='add-golf-course-wrapper'>
+            <form onSubmit={handleSubmit}>
+                <h1>Add New Golf Course</h1>
                 <label>Name:</label>
                 <input
                     type="text"
                     value={name}
                     onChange={(e) => setName(e.target.value)}
                 />
-            </div>
-            <div>
                 <label>Location:</label>
                 <input
                     type="text"
                     value={location}
                     onChange={(e) => setLocation(e.target.value)}
                 />
-            </div>
-            <div>
                 <label>Holes:</label>
                 <select
                     value={holes}
@@ -87,50 +80,70 @@ function AddGolfCourse() {
                     <option value="9">9</option>
                     <option value="18">18</option>
                 </select>
-            </div>
-            {holes && (
-                <div>
-                    <label>Number of Tee Boxes:</label>
-                    <select
-                        value={amountOfTeeBoxes}
-                        onChange={handleTeeBoxesChange}
-                    >
-                        <option value="">Select number of tee boxes</option>
-                        <option value="1">1</option>
-                        <option value="2">2</option>
-                        <option value="3">3</option>
-                        <option value="4">4</option>
-                    </select>
-                </div>
-            )}
-            {Array.from({ length: amountOfTeeBoxes }).map((_, index) => (
-                <div 
-                    key={index} 
-                    style={{ margin: '10px 0' }}
-                >
-                    <label>Tee Box {index + 1} Color:</label>
-                    <input
-                        type="text"
-                        value={teeBoxDetails[index].color}
-                        onChange={(e) => handleTeeBoxDetailChange(index, 'color', e.target.value)}
-                    />
-                    {Array.from({ length: parseInt(holes) }).map((_, holeIndex) => (
-                        <div 
-                            key={holeIndex} 
-                            style={{ margin: '5px 0' }}
+                {holes && (
+                    <>
+                        <label>Tee Boxes:</label>
+                        <select
+                            value={amountOfTeeBoxes}
+                            onChange={handleTeeBoxesChange}
                         >
-                            <label>Hole {holeIndex + 1} Yardage:</label>
-                            <input
-                                type="number"
-                                value={teeBoxDetails[index].yardages[holeIndex]}
-                                onChange={(e) => handleTeeBoxDetailChange(index, holeIndex, e.target.value)}
-                            />
+                            <option value="">Number of Tee Boxes</option>
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                        </select>
+                    </>
+                )}
+                {Array.from({ length: amountOfTeeBoxes }).map((_, index) => (
+                    <div className='tee-box-form-wrapper'>
+                        <div key={index} style={{ margin: '10px 0' }}>
+                            <label>Tee Box {index + 1} Color:</label><br />
+                            <select
+                                value={teeBoxDetails[index]?.color || ''}
+                                onChange={(e) => handleTeeBoxDetailChange(index, 'color', e.target.value)}
+                            >
+                                <option value="">Select Color</option>
+                                <option value="Red">Red</option>
+                                <option value="Orange">Orange</option>
+                                <option value="Yellow">Yellow</option>
+                                <option value="Green">Green</option>
+                                <option value="Blue">Blue</option>
+                                <option value="Purple">Violet</option>
+                                <option value="White">White</option>
+                                <option value="Black">Black</option>
+                                <option value="Brown">Brown</option>
+                                <option value="Gray">Gray</option>
+                                <option value="Pink">Pink</option>
+                            </select>
+                            {Array.from({ length: parseInt(holes) }).map((_, holeIndex) => (
+                                <div 
+                                    key={holeIndex} 
+                                    style={{ margin: '5px 0' }}
+                                >
+                                    <label 
+                                        style={{ marginRight: holeIndex < 9 ? '13px' : '1.5px' }}
+                                    >
+                                        Hole {holeIndex + 1} Yards: 
+                                    </label>
+                                    <input
+                                        type="number"
+                                        value={teeBoxDetails[index]?.yardages[holeIndex] || ''}
+                                        onChange={(e) => handleTeeBoxDetailChange(index, holeIndex, e.target.value)}
+                                    />
+                                </div>
+                            ))}
                         </div>
-                    ))}
-                </div>
-            ))}
-            <button type="submit">Add Golf Course</button>
-        </form>
+                    </div>
+                ))}
+                <button 
+                    className='submit-button'
+                    type="submit"
+                >
+                    Add Golf Course
+                </button>
+            </form>
+        </div>
     );
 }
 

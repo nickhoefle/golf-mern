@@ -12,6 +12,43 @@ code {
     monospace;
 }
 
+.add-golf-course-wrapper {
+  display: flex;
+  justify-content: center;
+  max-height: 92vh;
+}
+
+.add-golf-course-wrapper form {
+  display: flex;
+  flex-direction: column;
+  outline: 5px solid black;
+  width: 50%;
+  background-color: white;
+  padding: 20px;
+  overflow-y: auto;
+  margin: 20px;
+}
+
+.add-golf-course-wrapper h1 {
+  text-align: center;
+}
+
+.add-golf-course-wrapper input, select, option {
+  font-size: 20px;
+  border: 2px solid black;
+  border-radius: 5px;
+  padding: 5px;
+}
+
+.add-golf-course-wrapper label {
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.add-golf-course-wrapper select {
+  width: 250px;
+}
+
 body {
   background-image: url(./Assets/images/golf-course.jpg);
   background-size: cover; 
@@ -76,7 +113,7 @@ body {
   width: 25vw;
 }
 
-.sign-in-wrapper button {
+.submit-button {
   background-color: #44d16c;
   width: 100%;
   margin-top: 20px;
@@ -107,4 +144,13 @@ body {
 .sign-in-wrapper label {
   font-size: 18px;
   font-weight: bold;
+}
+
+.tee-box-form-wrapper {
+  display: flex;
+  justify-content: center;
+}
+
+.tee-box-form-wrapper input[type='number'] {
+  width: 60px;
 }

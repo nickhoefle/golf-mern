@@ -6,6 +6,7 @@ import Register from './Components/Register'; // Import the Register component
 import SignIn from './Components/SignIn';
 import { auth } from './firebaseConfig';
 import { useAuthState } from 'react-firebase-hooks/auth';
+import AddGolfCourse from './Components/AddGolfCourse';
 
 const App = () => {
     const [user] = useAuthState(auth);
@@ -26,6 +27,10 @@ const App = () => {
                     <Route
                         path="/"
                         element={user ? <Home /> : <Navigate to="/login" />}
+                    />
+                    <Route
+                        path="/add-golf-course"
+                        element={<AddGolfCourse />}
                     />
                 </Routes>
             </div>
