@@ -31,7 +31,7 @@ const Navbar = () => {
                 <span className='navbar-page-title'>Nick Hoefle and Associates Golf</span>
                 {user ? (
                 <div>
-                    <span className='navbar-email'>{user.email}</span>
+                    <span id="username" className='navbar-email'>{user.email}</span>
                     <button onClick={handleSignOut}>Sign Out</button>
                 </div>
                 ) : (

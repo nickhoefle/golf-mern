@@ -57,6 +57,21 @@ body {
   height: 100vh;
 }
 
+.my-review-category-label {
+  font-weight: bold;
+  text-decoration: underline;
+  font-size: 18px;
+}
+
+.my-review-radio-buttons {
+  display: flex;
+  margin-bottom: 24px;
+}
+
+.my-review-radio-buttons label {
+  margin-right: 10px;
+}
+
 .navbar {
   display: flex;
   justify-content: space-between;
@@ -88,6 +103,15 @@ body {
 .navbar-page-title {
   font-size: 24px;
   font-weight: bold;
+}
+
+.new-review-wrapper {
+  margin-top: 8px;
+}
+
+.new-review-wrapper label {
+  font-size: 24px;
+  text-decoration: underline;
 }
 
 .page-title-wrapper {
@@ -159,6 +183,49 @@ body {
   font-weight: bold;
 }
 
+.review-individual {
+  margin-bottom: 20px;
+}
+
+.review-category-line {
+  display: flex;
+  align-items: center;
+}
+
+.review-category-line b {
+  margin-right: 4px;
+  margin-left: 4px;
+}
+
+.review-svg {
+  height: 18px;
+  margin-left: 16px;
+}
+
+.review-tabs-wrapper {
+  font-size: 24px;
+  font-weight: bold;
+  margin: 10px 0 20px 0;
+}
+
+.review-tabs-wrapper .active {
+  text-decoration: underline;
+}
+
+.review-tabs-wrapper span {
+  margin-right: 12px;
+  cursor: pointer;
+}
+
+.review-wrapper h3 {
+  margin: 0 0 10px 0;
+  text-decoration: underline;
+}
+
+.review-wrapper p {
+  margin: 1px;
+}
+
 .tee-box-form-wrapper {
   display: flex;
   justify-content: center;
@@ -166,6 +233,13 @@ body {
 
 .tee-box-form-wrapper input[type='number'] {
   width: 60px;
+}
+
+.two-criteria-row {
+  display: flex;
+  width: 420px;
+  justify-content: space-between;
+  padding-bottom: 20px;
 }
 
 .view-course-info-wrapper p {
