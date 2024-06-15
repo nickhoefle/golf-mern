@@ -25,7 +25,7 @@ const ViewScoreCard = () => {
 
     return (
         <div className='view-course-info-wrapper'>
-            <label>Golf Course:</label>
+            <label>Golf Course: </label>
             <select 
                 id="golf-course-select" 
                 value={selectedCourse ? selectedCourse._id : ''} 
@@ -33,7 +33,10 @@ const ViewScoreCard = () => {
             >
                 <option value="">Select Course</option>
                 {golfCourses.map((course) => (
-                    <option key={course._id} value={course._id}>
+                    <option 
+                        key={course._id} 
+                        value={course._id}
+                    >
                         {course.name}
                     </option>
                 ))}
@@ -42,33 +45,31 @@ const ViewScoreCard = () => {
             {selectedCourse && (
                 <div>
                     <p>{selectedCourse.location}</p>
-                    <div>
-                        <table className='scorecard-table'>
-                            <tr>
-                                <th>Hole</th>
-                                {Array.from({ length: selectedCourse.holes }).map((_, index) => (
-                                    <th>{index + 1}</th>
-                                ))}
-                            </tr>
-                            <tr>
-                                <td>Par:</td>
-                                {selectedCourse.pars.map((par) => (
-                                    <td>{par}</td>
-                                ))}
-                            </tr>
-                            {selectedCourse.teeBoxes.map((teeBox) => (
-                                <tr 
-                                    key={teeBox._id}
-                                    style={{ backgroundColor: teeBox.color }}
-                                >
-                                    <td>{teeBox.color} Tees</td>
-                                    {teeBox.yardages.map((yardage, index) => (
-                                        <td key={index}>{yardage}</td>
-                                    ))}
-                                </tr>
+                    <table className='scorecard-table'>
+                        <tr>
+                            <th>Hole</th>
+                            {Array.from({ length: selectedCourse.holes }).map((_, index) => (
+                                <th>{index + 1}</th>
                             ))}
-                        </table>
-                    </div>
+                        </tr>
+                        <tr>
+                            <td>Par</td>
+                            {selectedCourse.pars.map((par) => (
+                                <td>{par}</td>
+                            ))}
+                        </tr>
+                        {selectedCourse.teeBoxes.map((teeBox) => (
+                            <tr 
+                                key={teeBox._id}
+                                style={{ backgroundColor: teeBox.color }}
+                            >
+                                <td>{teeBox.color} Tees</td>
+                                {teeBox.yardages.map((yardage, index) => (
+                                    <td key={index}>{yardage}</td>
+                                ))}
+                            </tr>
+                        ))}
+                    </table>
                 </div>
             )}
         </div>
