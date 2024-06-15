@@ -57,6 +57,33 @@ body {
   height: 100vh;
 }
 
+.course-dropdown-line-wrapper {
+  display: flex;
+  align-items: center;
+  margin-top: 15px;
+}
+
+.course-dropdown-line-wrapper label {
+  margin-right: 5px;
+}
+
+.golf-outing-link-wrapper {
+  display: flex;
+  align-items: center;
+  font-size: 24px;
+  font-weight: bold;
+}
+
+.golf-outing-link-wrapper a {
+  text-decoration: none;
+  color: black;
+}
+
+.golf-outing-link-wrapper a:hover {
+  cursor: pointer;
+  text-decoration: underline;
+}
+
 .navbar {
   display: flex;
   justify-content: space-between;

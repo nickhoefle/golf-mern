@@ -25,22 +25,29 @@ const ViewScoreCard = () => {
 
     return (
         <div className='view-course-info-wrapper'>
-            <label>Golf Course: </label>
-            <select 
-                id="golf-course-select" 
-                value={selectedCourse ? selectedCourse._id : ''} 
-                onChange={handleCourseChange}
-            >
-                <option value="">Select Course</option>
-                {golfCourses.map((course) => (
-                    <option 
-                        key={course._id} 
-                        value={course._id}
-                    >
-                        {course.name}
-                    </option>
-                ))}
-            </select>
+            <div className='course-dropdown-line-wrapper'>
+                <img 
+                    src="/images/hole-flag.svg"
+                    width='60px'
+                    height='auto'
+                />
+                <label>Golf Course:</label>
+                <select 
+                    id="golf-course-select" 
+                    value={selectedCourse ? selectedCourse._id : ''} 
+                    onChange={handleCourseChange}
+                >
+                    <option value="">Select Course</option>
+                    {golfCourses.map((course) => (
+                        <option 
+                            key={course._id} 
+                            value={course._id}
+                        >
+                            {course.name}
+                        </option>
+                    ))}
+                </select>
+            </div>
 
             {selectedCourse && (
                 <div>
