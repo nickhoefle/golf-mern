@@ -7,7 +7,6 @@ import SignIn from './Components/SignIn';
 import { auth } from './firebaseConfig';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import AddGolfCourse from './Components/AddGolfCourse';
-import LogGolfOuting from './Components/LogGolfOuting';
 
 const App = () => {
     const [user] = useAuthState(auth);
@@ -32,10 +31,6 @@ const App = () => {
                     <Route
                         path="/add-golf-course"
                         element={<AddGolfCourse />}
-                    />
-                    <Route
-                        path="/log-golf-outing"
-                        element={ <LogGolfOuting /> }
                     />
                 </Routes>
             </div>

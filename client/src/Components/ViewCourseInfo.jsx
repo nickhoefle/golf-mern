@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
+import CourseReview from './CourseReview';
 
 const ViewScoreCard = () => {
     const [golfCourses, setGolfCourses] = useState([]);
@@ -24,14 +25,9 @@ const ViewScoreCard = () => {
     };
 
     return (
-        <div className='view-course-info-wrapper'>
-            <div className='course-dropdown-line-wrapper'>
-                <img 
-                    src="/images/hole-flag.svg"
-                    width='60px'
-                    height='auto'
-                />
-                <label>Golf Course:</label>
+        <>
+            <div className='view-course-info-wrapper'>
+                <label>Golf Course: </label>
                 <select 
                     id="golf-course-select" 
                     value={selectedCourse ? selectedCourse._id : ''} 
@@ -47,39 +43,40 @@ const ViewScoreCard = () => {
                         </option>
                     ))}
                 </select>
-            </div>
 
-            {selectedCourse && (
-                <div>
-                    <p>{selectedCourse.location}</p>
-                    <table className='scorecard-table'>
-                        <tr>
-                            <th>Hole</th>
-                            {Array.from({ length: selectedCourse.holes }).map((_, index) => (
-                                <th>{index + 1}</th>
-                            ))}
-                        </tr>
-                        <tr>
-                            <td>Par</td>
-                            {selectedCourse.pars.map((par) => (
-                                <td>{par}</td>
-                            ))}
-                        </tr>
-                        {selectedCourse.teeBoxes.map((teeBox) => (
-                            <tr 
-                                key={teeBox._id}
-                                style={{ backgroundColor: teeBox.color }}
-                            >
-                                <td>{teeBox.color} Tees</td>
-                                {teeBox.yardages.map((yardage, index) => (
-                                    <td key={index}>{yardage}</td>
+                {selectedCourse && (
+                    <div>
+                        <p>{selectedCourse.location}</p>
+                        <table className='scorecard-table'>
+                            <tr>
+                                <th>Hole</th>
+                                {Array.from({ length: selectedCourse.holes }).map((_, index) => (
+                                    <th>{index + 1}</th>
                                 ))}
                             </tr>
-                        ))}
-                    </table>
-                </div>
-            )}
-        </div>
+                            <tr>
+                                <td>Par</td>
+                                {selectedCourse.pars.map((par) => (
+                                    <td>{par}</td>
+                                ))}
+                            </tr>
+                            {selectedCourse.teeBoxes.map((teeBox) => (
+                                <tr 
+                                    key={teeBox._id}
+                                    style={{ backgroundColor: teeBox.color }}
+                                >
+                                    <td>{teeBox.color} Tees</td>
+                                    {teeBox.yardages.map((yardage, index) => (
+                                        <td key={index}>{yardage}</td>
+                                    ))}
+                                </tr>
+                            ))}
+                        </table>
+                    </div>
+                )}
+            </div>        
+            {selectedCourse && <CourseReview course={selectedCourse}/>}
+        </>
     );
 };
 
