@@ -1,8 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { auth } from '../firebaseConfig';
 import { onAuthStateChanged, signOut } from 'firebase/auth';
-import { useLocation } from 'react-router-dom';
-
+import { useLocation, Link } from 'react-router-dom';
 
 const Navbar = () => {
     const [user, setUser] = useState(null);
@@ -18,25 +17,25 @@ const Navbar = () => {
 
     const handleSignOut = async () => {
         try {
-        await signOut(auth);
+            await signOut(auth);
         } catch (error) {
-        console.error('Error signing out:', error);
+            console.error('Error signing out:', error);
         }
     };
 
-    if (location.pathname === '/login') return null;
+    if (['/login', '/register'].includes(location.pathname)) return null;
 
     return (
         <nav className='navbar'>
-                <span className='navbar-page-title'>Nick Hoefle and Associates Golf</span>
-                {user ? (
+            <span className='navbar-page-title'>Nick Hoefle and Associates Golf</span>
+            {user ? (
                 <div>
                     <span id="username" className='navbar-email'>{user.email}</span>
-                    <button onClick={handleSignOut}>Sign Out</button>
+                    <button onClick={handleSignOut} className='sign-out-button'>Sign Out</button>
                 </div>
-                ) : (
-                <span>Not logged in</span>
-                )}
+            ) : (
+                <Link to="/login" className='sign-in-link'>Sign In</Link>
+            )}
         </nav>
     );
 };

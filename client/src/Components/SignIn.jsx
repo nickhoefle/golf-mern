@@ -13,7 +13,7 @@ const SignIn = () => {
         try {
             await signInWithEmailAndPassword(auth, email, password);
             console.log('User signed in successfully');
-            navigate('/');
+            navigate('/'); // Redirect to home page after sign-in
         } catch (error) {
             console.error('Error signing in:', error);
         }
@@ -36,10 +36,7 @@ const SignIn = () => {
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
                 />
-                <button 
-                    onClick={signIn}
-                    className='submit-button'    
-                >
+                <button onClick={signIn} className='submit-button'>
                     Sign In
                 </button>
             </div>

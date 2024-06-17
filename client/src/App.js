@@ -1,37 +1,33 @@
 import React from 'react';
-import { BrowserRouter as Router, Route, Routes, Navigate } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import Navbar from './Components/Navbar';
 import Home from './Components/Home';
-import Register from './Components/Register'; // Import the Register component
+import Register from './Components/Register';
 import SignIn from './Components/SignIn';
-import { auth } from './firebaseConfig';
-import { useAuthState } from 'react-firebase-hooks/auth';
 import AddGolfCourse from './Components/AddGolfCourse';
+import { useAuthState } from 'react-firebase-hooks/auth';
+import { auth } from './firebaseConfig';
 
 const App = () => {
-    const [user] = useAuthState(auth);
+    const [user, loading, error] = useAuthState(auth);
+
+    if (loading) {
+        return <div>Loading...</div>;
+    }
+
+    if (error) {
+        return <div>Error: {error.message}</div>;
+    }
 
     return (
         <Router>
             <div>
                 <Navbar />
                 <Routes>
-                    <Route
-                        path="/login"
-                        element={<SignIn />}
-                    />
-                    <Route
-                        path="/register"
-                        element={<Register />}
-                    />
-                    <Route
-                        path="/"
-                        element={user ? <Home /> : <Navigate to="/login" />}
-                    />
-                    <Route
-                        path="/add-golf-course"
-                        element={<AddGolfCourse />}
-                    />
+                    <Route path="/login" element={<SignIn />} />
+                    <Route path="/register" element={<Register />} />
+                    <Route path="/" element={user ? <Home /> : <Navigate to="/login" />} />
+                    <Route path="/add-golf-course" element={user ? <AddGolfCourse /> : <Navigate to="/login" />} />
                 </Routes>
             </div>
         </Router>
