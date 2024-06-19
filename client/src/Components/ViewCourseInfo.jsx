@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import CourseReview from './CourseReview';
+import AddGolfOuting from './AddGolfOuting';
 
 const ViewScoreCard = () => {
     const [golfCourses, setGolfCourses] = useState([]);
@@ -71,6 +72,7 @@ const ViewScoreCard = () => {
                                     ))}
                                 </tr>
                             ))}
+                            <AddGolfOuting selectedCourse={selectedCourse} />
                         </table>
                     </div>
                 )}
