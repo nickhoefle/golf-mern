@@ -1,66 +1,85 @@
 import React, { useState, useEffect } from 'react';
+import axios from 'axios';
 
-const AddGolfOuting = ({selectedCourse}) => {
+const AddGolfOuting = ({ selectedCourse }) => {
     const [addingOuting, setAddingOuting] = useState(false);
     const [user, setUser] = useState('');
-    const [scores, setScores] = useState('');
-    
-    useEffect(() => { 
+    const [scores, setScores] = useState([]);
+
+    useEffect(() => {
         setUser(document.getElementById('username').innerHTML);
     }, []);
 
-    useEffect(() => { 
+    useEffect(() => {
         setAddingOuting(false);
+        setScores(Array.from({ length: selectedCourse.holes }, () => ''));
     }, [selectedCourse]);
 
     const handleButtonClick = () => {
         setAddingOuting(!addingOuting);
-    }
+    };
 
     const handleScoreChange = (index, value) => {
         const newScores = [...scores];
-        newScores[index] = value;
+        newScores[index] = value; 
         setScores(newScores);
     };
 
-    /* eslint-disable no-restricted-globals */
-    const handleFinishedClick = () => {
-        for (const hole in scores) {
-            if (scores[hole] > 15) {
-                const holeNumber = parseInt(hole) + 1;
-                const confirmed = confirm('Your score for Hole ' + holeNumber + ' seems high. Proceed?');
+    const handleFinishedClick = async () => {
+        const parsedScores = scores.map(score => parseInt(score));
+        
+        for (const [index, score] of parsedScores.entries()) {
+            if (score > 15) {
+                const holeNumber = index + 1;
+                const confirmed = window.confirm(`Your score for Hole ${holeNumber} seems high. Proceed?`);
                 if (!confirmed) {
-                    console.log('Whoops')
+                    console.log('User canceled.');
                     return;
                 }
             }
         }
-        console.log('Unfortunately so');
-        console.log(scores);
+    
+        const outingData = {
+            user: user,  
+            course: selectedCourse._id,  
+            scores: parsedScores
+        };
+    
+        try {
+            const response = await axios.post('/api/golf-outings', outingData, {
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            });
+    
+            console.log('New Golf Outing:', response.data);
+    
+        } catch (error) {
+            console.error('Error creating golf outing:', error.message);
+        }
     };
-    /* eslint-disable no-restricted-globals */
 
     return (
         <>
-            {addingOuting && 
+            {addingOuting && (
                 <tr>
                     <td>{user}</td>
                     {Array.from({ length: selectedCourse.holes }).map((_, index) => (
-                        <td>
+                        <td key={index}>
                             <input
                                 type="number"
                                 value={scores[index]}
                                 onChange={(e) => handleScoreChange(index, e.target.value)}
-                                style={{width:'50px', fontSize:'18px', textAlign:'center'}}
+                                style={{ width: '50px', fontSize: '18px', textAlign: 'center' }}
                             />
                         </td>
                     ))}
                 </tr>
-            }
-            { !addingOuting && <button onClick={handleButtonClick}>Add Golf Outing</button> }
-            { addingOuting && <button onClick={handleButtonClick}>Cancel</button>}
-            { addingOuting && <button onClick={handleFinishedClick}>Finished</button> }
-            </>
+            )}
+            {!addingOuting && <button onClick={handleButtonClick}>Add Golf Outing</button>}
+            {addingOuting && <button onClick={handleButtonClick}>Cancel</button>}
+            {addingOuting && <button onClick={handleFinishedClick}>Finished</button>}
+        </>
     );
 };
 
