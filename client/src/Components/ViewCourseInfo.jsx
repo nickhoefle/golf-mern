@@ -6,6 +6,7 @@ import AddGolfOuting from './AddGolfOuting';
 const ViewScoreCard = () => {
     const [golfCourses, setGolfCourses] = useState([]);
     const [selectedCourse, setSelectedCourse] = useState(null);
+    const [outingsAtCourse, setOutingsAtCourse] = useState([]);
 
     useEffect(() => {
         const fetchGolfCourses = async () => {
@@ -18,6 +19,20 @@ const ViewScoreCard = () => {
         };
         fetchGolfCourses();
     }, []);
+
+    useEffect(() => {
+        const fetchGolfOutings = async () => {
+            try {
+                if (selectedCourse) {
+                    const response = await axios.get(`/api/golf-outings/course/${selectedCourse._id}`);
+                    setOutingsAtCourse(response.data);
+                }
+            } catch (error) {
+                console.error('Error fetching golf outings:', error);
+            }
+        };
+        fetchGolfOutings();
+    }, [selectedCourse]);
 
     const handleCourseChange = (event) => {
         const courseId = event.target.value;
@@ -71,6 +86,17 @@ const ViewScoreCard = () => {
                                         <td key={index}>{yardage}</td>
                                     ))}
                                 </tr>
+                            ))}
+                            {outingsAtCourse.map((outing, index) =>(
+                                <tr key={index}>
+                                    <td>{outing.user}</td>
+                                    {outing.scores.map((score) => (
+                                        <td>
+                                            {score}
+                                        </td>
+                                    ))}
+                                </tr>
+
                             ))}
                             <AddGolfOuting selectedCourse={selectedCourse} />
                         </table>
