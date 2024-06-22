@@ -41,7 +41,7 @@ const AddGolfOuting = ({ selectedCourse }) => {
     
         const outingData = {
             user: user,  
-            course: selectedCourse._id,  
+            course: selectedCourse,  
             scores: parsedScores
         };
     
