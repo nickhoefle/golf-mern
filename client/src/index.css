@@ -49,12 +49,42 @@ code {
   width: 250px;
 }
 
+.add-golf-outing-button {
+  font-size: 20px;
+  margin-top: 20px;
+  outline: 1px solid black;
+  padding: 8px;
+  border-radius: 5px;
+  background-color: white;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.add-golf-outing-button:hover {
+  background-color: rgb(226, 223, 223);
+}
+
 body {
   background-image: url('./images/golf-course.jpg');
   background-size: cover; 
   background-position: center bottom; 
   background-repeat: no-repeat;
   height: 100vh;
+}
+
+.cancel-golf-outing-button {
+  font-size: 20px;
+  margin: 20px 8px 0 0;
+  outline: 1px solid black;
+  padding: 8px;
+  border-radius: 5px;
+  background-color: #f78282;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.cancel-golf-outing-button:hover {
+  background-color: #d46f6f;
 }
 
 .my-review-category-label {
@@ -166,6 +196,21 @@ body {
   border: 2px solid black;
   padding: 5px;
   cursor: pointer;
+}
+
+.submit-golf-outing-button {
+  font-size: 20px;
+  margin-top: 20px;
+  outline: 1px solid black;
+  padding: 8px;
+  border-radius: 5px;
+  background-color: #44d16c;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.submit-golf-outing-button:hover {
+  background-color: #38ae5a;
 }
 
 .sign-in-wrapper button:hover {

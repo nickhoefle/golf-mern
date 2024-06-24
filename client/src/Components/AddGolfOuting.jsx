@@ -76,9 +76,9 @@ const AddGolfOuting = ({ selectedCourse }) => {
                     ))}
                 </tr>
             )}
-            {!addingOuting && <button onClick={handleButtonClick}>Add Golf Outing</button>}
-            {addingOuting && <button onClick={handleButtonClick}>Cancel</button>}
-            {addingOuting && <button onClick={handleFinishedClick}>Finished</button>}
+            {!addingOuting && <button onClick={handleButtonClick} className='add-golf-outing-button'>Add Golf Outing</button>}
+            {addingOuting && <button onClick={handleButtonClick} className='cancel-golf-outing-button'>Cancel</button>}
+            {addingOuting && <button onClick={handleFinishedClick} className='submit-golf-outing-button'>Submit</button>}
         </>
     );
 };
