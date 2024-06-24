@@ -126,14 +126,19 @@ body {
 .scorecard-table td, th {
   outline: 3px solid black;
   padding: 4px;
-  width: 24px;
+  width: 45px;
+  max-width: 45px;
   text-align: center;
-  font-size: 24px;
+  font-size: 20px;
 }
 
 .scorecard-table tr td:first-child {
-  width: 150px;
+  width: 250px;
+  max-width: 250px;
   text-align: left;
+  white-space: nowrap; 
+  overflow: hidden; 
+  text-overflow: ellipsis;
 }
 
 .sign-in-wrapper {
