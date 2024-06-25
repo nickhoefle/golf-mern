@@ -40,6 +40,10 @@ const ViewScoreCard = () => {
         setSelectedCourse(selected || null);
     };
 
+    const openEditPage = (selectedCourse) => {
+        window.location.href=`/edit-golf-course?id=${selectedCourse._id}`;
+    }
+
     return (
         <>
             <div className='view-course-info-wrapper'>
@@ -59,6 +63,14 @@ const ViewScoreCard = () => {
                         </option>
                     ))}
                 </select>
+                {selectedCourse && (
+                    <img 
+                        src='/images/pencil.svg' 
+                        alt='pencil-svg'
+                        className='edit-pencil-svg'
+                        onClick={() => openEditPage(selectedCourse)}
+                    />
+                )}
 
                 {selectedCourse && (
                     <div>

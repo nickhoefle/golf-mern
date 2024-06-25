@@ -87,6 +87,13 @@ body {
   background-color: #d46f6f;
 }
 
+.edit-pencil-svg {
+  height: 23px;
+  margin-left: 12px;
+  background-color: white;
+  cursor: pointer;
+}
+
 .my-review-category-label {
   font-weight: bold;
   text-decoration: underline;

@@ -7,6 +7,7 @@ import SignIn from './Components/SignIn';
 import AddGolfCourse from './Components/AddGolfCourse';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { auth } from './firebaseConfig';
+import EditCourseInfo from './Components/EditCourseInfo';
 
 const App = () => {
     const [user, loading, error] = useAuthState(auth);
@@ -28,6 +29,7 @@ const App = () => {
                     <Route path="/register" element={<Register />} />
                     <Route path="/" element={user ? <Home /> : <Navigate to="/login" />} />
                     <Route path="/add-golf-course" element={user ? <AddGolfCourse /> : <Navigate to="/login" />} />
+                    <Route path="/edit-golf-course" element={user ? <EditCourseInfo /> : <Navigate to="/login" />} />
                 </Routes>
             </div>
         </Router>
