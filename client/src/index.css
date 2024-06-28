@@ -262,6 +262,27 @@ body {
   margin-bottom: 0px;
 }
 
+.sidebar-wrapper ul {
+  list-style-type: none;
+  padding-left: 20px; 
+}
+
+.sidebar-wrapper ul li {
+  line-height: 1.5; 
+}
+
+.sidebar-wrapper ul li::before {
+  content: "";
+  width: 16px; 
+  height: 16px; 
+  background-image: url('./images/golf-ball.svg'); 
+  background-size: cover; 
+  background-repeat: no-repeat;
+  display: inline-block; 
+  vertical-align: middle; 
+  margin-right: 10px;
+}
+
 .sign-in-wrapper {
   background-color: white;
   display: flex;

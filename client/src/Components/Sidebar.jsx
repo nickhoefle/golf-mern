@@ -117,7 +117,7 @@ const Sidebar = () => {
                 {[...birdies].map((birdie, index) => (
                     <ul>
                         <li key={index}>
-                            {birdie.player} scored one at {birdie.courseName} on Hole {birdie.holeNumber}!
+                            {birdie.player} - Hole {birdie.holeNumber} at {birdie.courseName}!
                         </li> 
                     </ul>
                 ))}
@@ -125,7 +125,7 @@ const Sidebar = () => {
                 {[...pars].map((par, index) => (
                     <ul>
                         <li key={index}>
-                            {par.player} hit for par at {par.courseName} on Hole #{par.holeNumber}!
+                            {par.player} - Hole {par.holeNumber} at {par.courseName}!
                         </li> 
                     </ul>
                 ))}
@@ -135,7 +135,7 @@ const Sidebar = () => {
                 {[...bogeys].map((bogey, index) => (
                     <ul>
                         <li key={index}>
-                            {bogey.player} scored a bogey at {bogey.courseName} on Hole #{bogey.holeNumber}!
+                            {bogey.player} - Hole {bogey.holeNumber} at {bogey.courseName}!
                         </li> 
                     </ul>
                 ))}
