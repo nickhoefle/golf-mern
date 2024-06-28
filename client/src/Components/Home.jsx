@@ -8,9 +8,7 @@ const Home = () => {
             <div style={{width: '75%', backgroundColor: 'white', padding: '20px'}}>
                 <ViewCourseInfo />
             </div>
-            <div style={{width: '25%', backgroundColor: 'gray', padding: '20px'}}>
-                <Sidebar />
-            </div>
+            <Sidebar />
         </div>
     );
 };

@@ -108,16 +108,20 @@ const Sidebar = () => {
     console.log(birdies);
 
     return (
-        <div>
-            <h1>Sidebar!</h1>
+        <div className='sidebar-wrapper'>
+            <h1>Highlights from the Course</h1>
             <div>
+                <div className='sidebar-birdies-header-wrapper'>
+                    <h2 className='sidebar-birdies-header'>Birdies</h2>
+                </div>
                 {[...birdies].map((birdie, index) => (
                     <ul>
                         <li key={index}>
-                            {birdie.player} scored a birdie at {birdie.courseName} on Hole #{birdie.holeNumber}!
+                            {birdie.player} scored one at {birdie.courseName} on Hole {birdie.holeNumber}!
                         </li> 
                     </ul>
                 ))}
+                <h2>Pars</h2>
                 {[...pars].map((par, index) => (
                     <ul>
                         <li key={index}>
@@ -125,6 +129,9 @@ const Sidebar = () => {
                         </li> 
                     </ul>
                 ))}
+                <div className='sidebar-bogeys-header-wrapper'>
+                    <h2 className='sidebar-bogeys-header'>Bogeys</h2>
+                </div>
                 {[...bogeys].map((bogey, index) => (
                     <ul>
                         <li key={index}>

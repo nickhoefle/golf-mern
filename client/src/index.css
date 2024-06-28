@@ -228,6 +228,40 @@ body {
   text-overflow: ellipsis;
 }
 
+.sidebar-birdies-header {
+  border: 2px solid black;
+  border-radius: 50%;
+  width: 100px;
+  padding: 32px 0px 32px 0px;
+}
+
+.sidebar-birdies-header-wrapper {
+  display: flex;
+  justify-content: center;
+}
+
+.sidebar-bogeys-header {
+  border: 2px solid black;
+  width: 100px;
+  padding: 32px 0px 32px 0px;
+  margin-top: 8px;
+}
+
+.sidebar-bogeys-header-wrapper {
+  display: flex;
+  justify-content: center;
+}
+
+.sidebar-wrapper {
+  background-color: white;
+  border-left: 5px solid black;
+}
+
+.sidebar-wrapper h1, h2 {
+  text-align: center;
+  margin-bottom: 0px;
+}
+
 .sign-in-wrapper {
   background-color: white;
   display: flex;
