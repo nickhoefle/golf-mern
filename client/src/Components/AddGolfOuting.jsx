@@ -5,6 +5,7 @@ const AddGolfOuting = ({ selectedCourse }) => {
     const [addingOuting, setAddingOuting] = useState(false);
     const [user, setUser] = useState('');
     const [scores, setScores] = useState([]);
+    const [outingDate, setOutingDate] = useState('');
 
     useEffect(() => {
         setUser(document.getElementById('username').innerHTML);
@@ -21,13 +22,17 @@ const AddGolfOuting = ({ selectedCourse }) => {
 
     const handleScoreChange = (index, value) => {
         const newScores = [...scores];
-        newScores[index] = value; 
+        newScores[index] = value;
         setScores(newScores);
+    };
+
+    const handleDateChange = (e) => {
+        setOutingDate(e.target.value);
     };
 
     const handleFinishedClick = async () => {
         const parsedScores = scores.map(score => parseInt(score));
-        
+
         for (const [index, score] of parsedScores.entries()) {
             if (score > 15) {
                 const holeNumber = index + 1;
@@ -38,22 +43,23 @@ const AddGolfOuting = ({ selectedCourse }) => {
                 }
             }
         }
-    
+
         const outingData = {
-            user: user,  
-            course: selectedCourse,  
-            scores: parsedScores
+            user: user,
+            course: selectedCourse,
+            scores: parsedScores,
+            date: outingDate, // Include outing date in the data
         };
-    
+
         try {
             const response = await axios.post('/api/golf-outings', outingData, {
                 headers: {
                     'Content-Type': 'application/json'
                 }
             });
-    
+
             console.log('New Golf Outing:', response.data);
-    
+
         } catch (error) {
             console.error('Error creating golf outing:', error.message);
         }
@@ -63,7 +69,15 @@ const AddGolfOuting = ({ selectedCourse }) => {
         <>
             {addingOuting && (
                 <tr>
-                    <td>{user}</td>
+                    <td style={{ display: 'flex', flexDirection: 'column'}}>
+                        {user}
+                        <input
+                            type="date"
+                            value={outingDate}
+                            onChange={handleDateChange}
+                            style={{ width: '150px', fontSize: '16px' }} // Adjust styling as needed
+                        />
+                    </td>
                     {Array.from({ length: selectedCourse.holes }).map((_, index) => (
                         <td key={index}>
                             <input
