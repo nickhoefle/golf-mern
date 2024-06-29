@@ -144,6 +144,16 @@ body {
   cursor: pointer;
 }
 
+.edit-teebox-wrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.edit-teebox-wrapper select {
+  width: 175px;
+}
+
 .my-review-category-label {
   font-weight: bold;
   text-decoration: underline;
