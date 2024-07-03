@@ -200,6 +200,12 @@ body {
 .navbar-page-title {
   font-size: 24px;
   font-weight: bold;
+  text-decoration: none;
+  color: black;
+}
+
+.navbar-page-title:hover {
+  text-decoration: underline;
 }
 
 .new-review-wrapper {

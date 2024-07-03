@@ -27,7 +27,10 @@ const Navbar = () => {
 
     return (
         <nav className='navbar'>
-            <span className='navbar-page-title'>Nick Hoefle and Associates Golf</span>
+            <a 
+                className='navbar-page-title'
+                href='/'
+            >Nick Hoefle and Associates Golf</a>
             {user ? (
                 <div>
                     <span id="username" className='navbar-email'>{user.email}</span>
