@@ -34,7 +34,7 @@ const ViewScoreCard = () => {
         fetchGolfOutings();
     }, [selectedCourse]);
 
-    const handleCourseChange = (event) => {
+    const handleSelectedCourseChange = (event) => {
         const courseId = event.target.value;
         const selected = golfCourses.find(course => course._id === courseId);
         setSelectedCourse(selected || null);
@@ -51,7 +51,7 @@ const ViewScoreCard = () => {
                 <select 
                     id="golf-course-select" 
                     value={selectedCourse ? selectedCourse._id : ''} 
-                    onChange={handleCourseChange}
+                    onChange={handleSelectedCourseChange}
                 >
                     <option value="">Select Course</option>
                     {golfCourses.map((course) => (
@@ -101,7 +101,7 @@ const ViewScoreCard = () => {
                             ))}
                             {outingsAtCourse.map((outing, index) =>(
                                 <tr key={index}>
-                                    <td>{outing.user}</td>
+                                    <td>{outing.date}{outing.user}</td>
                                     {outing.scores.map((score) => (
                                         <td>
                                             {score}
