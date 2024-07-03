@@ -108,7 +108,6 @@ const ViewScoreCard = () => {
                                         </td>
                                     ))}
                                 </tr>
-
                             ))}
                             <AddGolfOuting selectedCourse={selectedCourse} />
                         </table>

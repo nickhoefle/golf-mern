@@ -37,18 +37,7 @@ const EditCourseInfo = () => {
 
     const handleInputChange = (e) => {
         const { name, value } = e.target;
-    
-        if (name === 'holes') {
-            const newPars = formData.pars.slice(0, parseInt(value));
-            const updatedTeeBoxes = formData.teeBoxes.map(teeBox => {
-                const updatedYardages = teeBox.yardages.slice(0, parseInt(value));
-                return { ...teeBox, yardages: updatedYardages };
-            });
-    
-            setFormData({ ...formData, [name]: value, pars: newPars, teeBoxes: updatedTeeBoxes });
-        } else {
-            setFormData({ ...formData, [name]: value });
-        }
+        setFormData({ ...formData, [name]: value });
     };
 
     const handleAddTeeBox = () => {
