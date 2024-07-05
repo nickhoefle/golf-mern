@@ -11,6 +11,23 @@ function AddGolfCourse() {
 
     const handleSubmit = async (event) => {
         event.preventDefault();
+
+        console.log(pars);
+        if (!name) {
+            alert('Please enter a name for the course.');
+            return;
+        } else if (!location) {
+            alert('Please enter an address for the course.');
+            return;
+        } else if (!holes) {
+            alert('Please specify the amount of holes for the course.');
+            return;
+        } else if (!pars || pars.some(par => par === '')) {
+            alert('Please fill out all par values for the course.');
+            console.log(pars)
+            return;
+        }
+
         const newGolfCourse = {
             name,
             location,
