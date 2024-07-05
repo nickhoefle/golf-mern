@@ -25,6 +25,9 @@ const ViewScoreCard = () => {
             try {
                 if (selectedCourse) {
                     const response = await axios.get(`/api/golf-outings/course/${selectedCourse._id}`);
+                    response.data.map((outing) => {
+                        outing.date = outing.date.slice(0,10);
+                    })
                     setOutingsAtCourse(response.data);
                 }
             } catch (error) {
@@ -35,8 +38,8 @@ const ViewScoreCard = () => {
     }, [selectedCourse]);
 
     const handleSelectedCourseChange = (event) => {
-        const courseId = event.target.value;
-        const selected = golfCourses.find(course => course._id === courseId);
+        const selectedCourseId = event.target.value;
+        const selected = golfCourses.find(course => course._id === selectedCourseId);
         setSelectedCourse(selected || null);
     };
 
@@ -101,7 +104,9 @@ const ViewScoreCard = () => {
                             ))}
                             {outingsAtCourse.map((outing, index) =>(
                                 <tr key={index}>
-                                    <td>{outing.date}{outing.user}</td>
+                                    <td>
+                                        <span className='outing-date-and-user'>{outing.date} {outing.user}</span>
+                                    </td>
                                     {outing.scores.map((score) => (
                                         <td>
                                             {score}

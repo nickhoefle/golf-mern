@@ -217,6 +217,11 @@ body {
   text-decoration: underline;
 }
 
+.outing-date-and-user {
+  font-weight: bold;
+  font-size: 16px;
+}
+
 .page-title-wrapper {
   position: absolute;
   top: 0;
