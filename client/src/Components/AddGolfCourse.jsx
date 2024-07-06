@@ -9,10 +9,10 @@ function AddGolfCourse() {
     const [amountOfTeeBoxes, setAmountOfTeeBoxes] = useState('');
     const [teeBoxDetails, setTeeBoxDetails] = useState([]);
 
+    console.log(teeBoxDetails);
     const handleSubmit = async (event) => {
         event.preventDefault();
 
-        console.log(pars);
         if (!name) {
             alert('Please enter a name for the course.');
             return;
@@ -25,6 +25,15 @@ function AddGolfCourse() {
         } else if (!pars || pars.some(par => par === '')) {
             alert('Please fill out all par values for the course.');
             console.log(pars)
+            return;
+        } else if (!amountOfTeeBoxes) {
+            alert('Please specify the amount of tee boxes.');
+            return;
+        } else if (teeBoxDetails.some(teeBox => teeBox.color === '')) {
+            alert('Specify colors for tee boxes.');
+            return;
+        } else if (teeBoxDetails.some(teeBox => teeBox.yardages.some(yardage => yardage === ''))) {
+            alert('Specify yardages for all holes.');
             return;
         }
 
