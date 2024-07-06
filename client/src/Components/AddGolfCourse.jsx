@@ -9,7 +9,6 @@ function AddGolfCourse() {
     const [amountOfTeeBoxes, setAmountOfTeeBoxes] = useState('');
     const [teeBoxDetails, setTeeBoxDetails] = useState([]);
 
-    console.log(teeBoxDetails);
     const handleSubmit = async (event) => {
         event.preventDefault();
 

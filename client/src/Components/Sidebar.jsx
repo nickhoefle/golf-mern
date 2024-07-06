@@ -105,8 +105,6 @@ const Sidebar = () => {
         setBogeys(new Set(Object.values(trackedBogeys)));
     }, [courseDetails, golfOutings]);
 
-    console.log(birdies);
-
     return (
         <div className='sidebar-wrapper'>
             <h1>Highlights from the Course</h1>
