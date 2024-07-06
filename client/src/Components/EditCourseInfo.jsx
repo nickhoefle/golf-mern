@@ -75,78 +75,93 @@ const EditCourseInfo = () => {
     };
 
     return (
-        <div>
-            <h1>Edit Course Information</h1>
-            <div className='edit-course-info-form-container'>
-                <form
-                    className='edit-course-info-form-wrapper' 
-                    onSubmit={handleFormSubmit}
-                >
-                    <label>Name:</label>
-                    <input
-                        type="text"
-                        name="name"
-                        value={formData.name}
-                        onChange={handleInputChange}
-                    />
-                    <label>Location:</label>
-                    <input
-                        type="text"
-                        name="location"
-                        value={formData.location}
-                        onChange={handleInputChange}
-                    />
-                    <label>Holes:</label>
-                    <span>{formData.holes}</span>
-                    <div className='edit-pars-wrapper'>
-                        {Array.from({ length: parseInt(formData.holes) }).map((_, holeIndex) => (
-                            <div key={holeIndex} className='edit-par-line'>
-                                <label>Hole #{holeIndex + 1} Par: </label>
-                                <input
-                                    type="number"
-                                    required
-                                    value={formData.pars[holeIndex] || ''}
-                                    onChange={(e) => {
-                                        const newPars = [...formData.pars];
-                                        newPars[holeIndex] = parseInt(e.target.value);
-                                        setFormData({ ...formData, pars: newPars });
-                                    }}
-                                />
-                            </div>
-                        ))}
-                    </div>
-                    <div>
-                        {formData.teeBoxes.map((teeBox, index) => (
+        <div className='edit-golf-course-wrapper'>
+            <form 
+                onSubmit={handleFormSubmit}
+            >
+                <h1>Edit Course Information</h1>
+                <label>Name:</label>
+                <input
+                    className='course-name-input'
+                    type="text"
+                    name="name"
+                    value={formData.name}
+                    onChange={handleInputChange}
+                />
+                <label>Location:</label>
+                <input
+                    className='course-location-input'
+                    type="text"
+                    name="location"
+                    value={formData.location}
+                    onChange={handleInputChange}
+                />
+                <div>
+                    {Array.from({ length: parseInt(formData.holes) }).map((_, holeIndex) => (
+                        <div 
+                            key={holeIndex}
+                            className='hole-par-line'
+                        >
+                            <label
+                                style={{ marginRight: holeIndex < 9 ? '20px' : '8px' }}
+                            >
+                                Hole {holeIndex + 1} Par: 
+                            </label>
+                            <input
+                                className='par-input'
+                                type="number"
+                                required
+                                value={formData.pars[holeIndex] || ''}
+                                onChange={(e) => {
+                                    const newPars = [...formData.pars];
+                                    newPars[holeIndex] = parseInt(e.target.value);
+                                    setFormData({ ...formData, pars: newPars });
+                                }}
+                            />
+                        </div>
+                    ))}
+                </div>
+                <div>
+                    {formData.teeBoxes.map((teeBox, index) => (
+                        <div className='add-edit-teebox-section-wrapper'>
                             <div 
                                 key={index}
-                                className='edit-teebox-wrapper'
+                                className='add-edit-teebox-section'
                             >
-                                <div>
-                                    <label>Tee Box #{index+1}</label>
-                                    <select
-                                        value={teeBox.color}
-                                        onChange={(e) => {
-                                            const newTeeBoxColor = [...formData.teeBoxes];
-                                            newTeeBoxColor[index].color = e.target.value;
-                                            setFormData({ ...formData, teeBoxes: newTeeBoxColor });
-                                        }}
-                                    >
-                                        <option value="">Select Color</option>
-                                        <option value="Red">Red</option>
-                                        <option value="Orange">Orange</option>
-                                        <option value="Yellow">Yellow</option>
-                                        <option value="Green">Green</option>
-                                        <option value="Blue">Blue</option>
-                                        <option value="Purple">Violet</option>
-                                        <option value="White">White</option>
-                                        <option value="Black">Black</option>
-                                        <option value="Brown">Brown</option>
-                                        <option value="Gray">Gray</option>
-                                        <option value="Pink">Pink</option>
-                                    </select>
-                                    {teeBox.yardages.map((yardage, holeIndex) => (
-                                        <input 
+                                <label>Tee Box #{index +1}</label>
+                                <select
+                                    className='teebox-color-dropdown'
+                                    value={teeBox.color}
+                                    onChange={(e) => {
+                                        const newTeeBoxColor = [...formData.teeBoxes];
+                                        newTeeBoxColor[index].color = e.target.value;
+                                        setFormData({ ...formData, teeBoxes: newTeeBoxColor });
+                                    }}
+                                >
+                                    <option value="">Select Color</option>
+                                    <option value="Red">Red</option>
+                                    <option value="Orange">Orange</option>
+                                    <option value="Yellow">Yellow</option>
+                                    <option value="Green">Green</option>
+                                    <option value="Blue">Blue</option>
+                                    <option value="Purple">Violet</option>
+                                    <option value="White">White</option>
+                                    <option value="Black">Black</option>
+                                    <option value="Brown">Brown</option>
+                                    <option value="Gray">Gray</option>
+                                    <option value="Pink">Pink</option>
+                                </select>
+                                {teeBox.yardages.map((yardage, holeIndex) => (
+                                    <div className='yardage-label-and-input'>
+                                        <label 
+                                            style={{ marginRight: holeIndex < 9 ? '15px' : '3.5px' }}
+                                        >
+                                            Hole {holeIndex + 1} Yards: 
+                                        </label>
+                                        <input
+                                            className='yardage-input'
                                             required
+                                            type='number'
                                             key={holeIndex}
                                             value={yardage}
                                             onChange={(e) => {
@@ -155,16 +170,35 @@ const EditCourseInfo = () => {
                                                 setFormData({ ...formData, teeBoxes: newTeeBoxYardages });
                                             }}
                                         />
-                                    ))}
-                                    <button type="button" onClick={() => handleDeleteTeeBox(index)}>Delete</button>
-                                </div>
+                                    </div>
+                                ))}
+                                <button 
+                                    className='delete-tee-box-button'
+                                    type="button" 
+                                    onClick={() => handleDeleteTeeBox(index)}
+                                >
+                                    Delete Tee Box
+                                </button>
                             </div>
-                        ))}
-                        <button type="button" onClick={handleAddTeeBox}>Add Tee Box</button>
+                        </div>
+                    ))}
+                    <div className='add-teebox-button-wrapper'>
+                        <button 
+                            className='add-teebox-button'
+                            type="button" 
+                            onClick={handleAddTeeBox}
+                        >
+                            Add Tee Box
+                        </button>
                     </div>
-                    <button type="submit">Update Course</button>
-                </form>
-            </div>
+                </div>
+                <button 
+                    className='submit-button'
+                    type="submit"
+                >
+                    Update Course
+                </button>
+            </form>
         </div>
     );
 };
