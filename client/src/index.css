@@ -326,7 +326,8 @@ body {
   border-left: 5px solid black;
 }
 
-.sidebar-wrapper h1, h2 {
+.sidebar-wrapper h1, 
+.sidebar-wrapper h2 {
   text-align: center;
   margin-bottom: 0px;
 }
@@ -364,6 +365,28 @@ body {
   left: 50%;
   transform: translate(-50%, -50%);
   width: 25vw;
+}
+
+.sort-and-filter-wrapper label {
+  font-size: 16px;
+}
+
+.sort-and-filter-wrapper input[type='radio'] {
+  width: 14px; 
+  height: 14px;
+  margin-left: 10px;
+}
+
+.sort-items-wrapper {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin-left: 16px;
+}
+
+.sort-outings-icon {
+  height: 20px;
+  width: auto;
 }
 
 .submit-button {
