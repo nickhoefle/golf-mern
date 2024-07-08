@@ -1,10 +1,15 @@
 import React from 'react';
 
-const SortAndFilterOutings = ({ onSortChange }) => {
+const SortAndFilterOutings = ({ onSortChange, onFilterChange, userEmail }) => {
 
     const handleSortChange = (e) => {
         const selectedSortBy = e.target.value;
         onSortChange(selectedSortBy); // Trigger the sort in parent component
+    };
+
+    const handleFilterChange = (e) => {
+        const selectedFilterBy = e.target.value;
+        onFilterChange(selectedFilterBy);
     };
 
     return (
@@ -34,6 +39,32 @@ const SortAndFilterOutings = ({ onSortChange }) => {
                         onChange={handleSortChange} 
                     />
                     Oldest First
+                </label>
+            </div>
+            <div className='filter-items-wrapper'>
+                <img 
+                    alt='filter-icon'
+                    src='/images/filter.svg' 
+                    className='filter-outings-icon'
+                />
+                <label>
+                    <input 
+                        defaultChecked
+                        type="radio" 
+                        name="filter" 
+                        value="all" 
+                        onChange={handleFilterChange} 
+                    />
+                    All Golfers
+                </label>
+                <label>
+                    <input 
+                        type="radio" 
+                        name="filter" 
+                        value={userEmail} 
+                        onChange={handleFilterChange} 
+                    />
+                    Only Me
                 </label>
             </div>
         </div>

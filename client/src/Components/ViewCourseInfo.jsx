@@ -8,7 +8,14 @@ const ViewScoreCard = () => {
     const [golfCourses, setGolfCourses] = useState([]);
     const [selectedCourse, setSelectedCourse] = useState(null);
     const [outingsAtCourse, setOutingsAtCourse] = useState([]);
-    const [sortBy, setSortBy] = useState('newest'); 
+    const [sortBy, setSortBy] = useState('newest');
+    const [filterBy, setFilterBy] = useState('all'); 
+    const [userEmail, setUserEmail] = useState('');
+
+    useEffect(() => {
+        const userEmail = document.getElementById('username').innerHTML; 
+        setUserEmail(userEmail);
+    }, []);
 
     useEffect(() => {
         const fetchGolfCourses = async () => {
@@ -34,11 +41,17 @@ const ViewScoreCard = () => {
                         scores: outing.scores
                     }));
 
-                    const sortedOutings = outingsData.sort((a, b) => {
+                    let filteredOutings = [...outingsData];
+                    if (filterBy === userEmail) {
+                        filteredOutings = filteredOutings.filter(outing => outing.user === userEmail);
+                    }
+
+                    const sortedOutings = filteredOutings.sort((a, b) => {
                         return sortBy === 'newest' ? new Date(b.date) - new Date(a.date) : new Date(a.date) - new Date(b.date);
                     });
 
                     setOutingsAtCourse(sortedOutings);
+                    
                 }
             } catch (error) {
                 console.error('Error fetching golf outings:', error);
@@ -46,7 +59,7 @@ const ViewScoreCard = () => {
         };
 
         fetchGolfOutings();
-    }, [selectedCourse, sortBy]); 
+    }, [selectedCourse, sortBy, filterBy, userEmail]); 
 
     const handleSelectedCourseChange = (event) => {
         const selectedCourseId = event.target.value;
@@ -61,6 +74,10 @@ const ViewScoreCard = () => {
     const handleSortChange = (selectedSortBy) => {
         setSortBy(selectedSortBy);
     };
+
+    const handleFilterChange = (selectedFilterBy) => {
+        setFilterBy(selectedFilterBy);
+    }
 
     return (
         <>
@@ -138,7 +155,7 @@ const ViewScoreCard = () => {
                     </div>
                 )}
             </div>   
-            { selectedCourse && <SortAndFilterOutings onSortChange={handleSortChange} /> }
+            { selectedCourse && <SortAndFilterOutings onSortChange={handleSortChange} onFilterChange={handleFilterChange} userEmail={userEmail}/> }
             { selectedCourse && <CourseReview course={selectedCourse} />}
         </>
     );
