@@ -99,17 +99,19 @@ const ViewScoreCard = () => {
                     ))}
                 </select>
                 {selectedCourse && (
-                    <img 
-                        src='/images/pencil.svg' 
-                        alt='pencil-svg'
-                        className='edit-pencil-svg'
-                        onClick={() => openEditPage(selectedCourse)}
-                    />
+                    <>
+                        <img 
+                            src='/images/pencil.svg' 
+                            alt='pencil-svg'
+                            className='edit-pencil-svg'
+                            onClick={() => openEditPage(selectedCourse)}
+                        />
+                        <p>{selectedCourse.location}</p>
+                    </>
                 )}
 
                 {selectedCourse && (
                     <div>
-                        <p>{selectedCourse.location}</p>
                         <table className='scorecard-table'>
                             <thead>
                                 <tr>
@@ -151,10 +153,11 @@ const ViewScoreCard = () => {
                                 ))}
                             </tbody>
                         </table>
-                        <AddGolfOuting selectedCourse={selectedCourse} />
+                        
                     </div>
                 )}
             </div>   
+            <AddGolfOuting selectedCourse={selectedCourse} />
             { selectedCourse && <SortAndFilterOutings onSortChange={handleSortChange} onFilterChange={handleFilterChange} userEmail={userEmail}/> }
             { selectedCourse && <CourseReview course={selectedCourse} />}
         </>

@@ -309,6 +309,11 @@ body {
   text-overflow: ellipsis;
 }
 
+.scorecard-table-wrapper {
+  overflow-x: auto;
+  width: 100%;
+}
+
 .sidebar-birdies-header {
   border: 2px solid black;
   border-radius: 50%;
