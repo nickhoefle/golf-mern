@@ -10,12 +10,9 @@ const ViewScoreCard = () => {
     const [outingsAtCourse, setOutingsAtCourse] = useState([]);
     const [sortBy, setSortBy] = useState('newest');
     const [filterBy, setFilterBy] = useState('all'); 
-    const [userEmail, setUserEmail] = useState('');
+    const [userEmail] = useState('Nickhoefle');
 
-    useEffect(() => {
-        const userEmail = document.getElementById('username').innerHTML; 
-        setUserEmail(userEmail);
-    }, []);
+    
 
     useEffect(() => {
         const fetchGolfCourses = async () => {
@@ -111,7 +108,7 @@ const ViewScoreCard = () => {
                 )}
 
                 {selectedCourse && (
-                    <div>
+                    <div className='scorecard-table-wrapper'>
                         <table className='scorecard-table'>
                             <thead>
                                 <tr>

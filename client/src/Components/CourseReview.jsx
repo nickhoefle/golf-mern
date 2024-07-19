@@ -6,7 +6,7 @@ const CourseReview = ({ course }) => {
     const [activeTab, setActiveTab] = useState('courseReviews');
     const [reviewData, setReviewData] = useState({
         _id: '',
-        user: document.getElementById('username').innerHTML,
+        user: 'Nickhoefle',
         course: course._id,
         overallExperienceRating: 0,
         valueRating: 0,
@@ -19,7 +19,7 @@ const CourseReview = ({ course }) => {
     useEffect(() => {
         const fetchReviewData = async () => {
             try {
-                const userEmail = document.getElementById('username').innerHTML;
+                const userEmail = 'Nickhoefle';
                 const response = await axios.get(`/api/course-reviews?course=${course._id}&user=${userEmail}`);
 
                 if (response.data.length > 0) {

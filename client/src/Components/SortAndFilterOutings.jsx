@@ -9,7 +9,7 @@ const SortAndFilterOutings = ({ onSortChange, onFilterChange, userEmail }) => {
 
     const handleFilterChange = (e) => {
         const selectedFilterBy = e.target.value;
-        onFilterChange(selectedFilterBy);
+        onFilterChange(selectedFilterBy); // Trigger the filter in parent component
     };
 
     return (

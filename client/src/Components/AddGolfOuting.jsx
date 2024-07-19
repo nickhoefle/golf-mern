@@ -8,13 +8,8 @@ const AddGolfOuting = ({ selectedCourse }) => {
     const [outingDate, setOutingDate] = useState('');
 
     useEffect(() => {
-        setUser(document.getElementById('username').innerHTML);
+        setUser('Nickhoefle');
     }, []);
-
-    useEffect(() => {
-        setAddingOuting(false);
-        setScores(Array.from({ length: selectedCourse.holes }, () => ''));
-    }, [selectedCourse]);
 
     const handleButtonClick = () => {
         setAddingOuting(!addingOuting);
