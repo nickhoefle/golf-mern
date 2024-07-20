@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import { getAuth } from 'firebase/auth';
 
 const AddGolfOuting = ({ selectedCourse }) => {
     const [addingOuting, setAddingOuting] = useState(false);
@@ -8,7 +9,8 @@ const AddGolfOuting = ({ selectedCourse }) => {
     const [outingDate, setOutingDate] = useState('');
 
     useEffect(() => {
-        setUser('Nickhoefle');
+        const auth = getAuth(); 
+        setUser(auth.currentUser.email)
     }, []);
 
     const handleButtonClick = () => {
@@ -85,7 +87,7 @@ const AddGolfOuting = ({ selectedCourse }) => {
                     ))}
                 </tr>
             )}
-            {!addingOuting && <button onClick={handleButtonClick} className='add-golf-outing-button'>Add Golf Outing</button>}
+            {!addingOuting && selectedCourse &&<button onClick={handleButtonClick} className='add-golf-outing-button'>Add Golf Outing</button>}
             {addingOuting && <button onClick={handleButtonClick} className='cancel-golf-outing-button'>Cancel</button>}
             {addingOuting && <button onClick={handleFinishedClick} className='submit-golf-outing-button'>Submit</button>}
         </>
