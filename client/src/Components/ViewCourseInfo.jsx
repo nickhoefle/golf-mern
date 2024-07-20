@@ -3,6 +3,7 @@ import axios from 'axios';
 import CourseReview from './CourseReview';
 import AddGolfOuting from './AddGolfOuting';
 import SortAndFilterOutings from './SortAndFilterOutings';
+import { getAuth } from 'firebase/auth';
 
 const ViewScoreCard = () => {
     const [golfCourses, setGolfCourses] = useState([]);
@@ -10,9 +11,12 @@ const ViewScoreCard = () => {
     const [outingsAtCourse, setOutingsAtCourse] = useState([]);
     const [sortBy, setSortBy] = useState('newest');
     const [filterBy, setFilterBy] = useState('all'); 
-    const [userEmail] = useState('Nickhoefle');
+    const [userEmail, setUserEmail] = useState('');
 
-    
+    useEffect(() => {
+        const auth = getAuth(); 
+        setUserEmail(auth.currentUser.email)
+    }, []);
 
     useEffect(() => {
         const fetchGolfCourses = async () => {
