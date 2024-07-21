@@ -2,8 +2,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { getAuth } from 'firebase/auth';
 
-const AddGolfOuting = ({ selectedCourse }) => {
-    const [addingOuting, setAddingOuting] = useState(false);
+const AddGolfOuting = ({ selectedCourse, outingAddedListener, addingOuting, setAddingOuting }) => {
     const [user, setUser] = useState('');
     const [scores, setScores] = useState([]);
     const [outingDate, setOutingDate] = useState('');
@@ -54,7 +53,8 @@ const AddGolfOuting = ({ selectedCourse }) => {
                     'Content-Type': 'application/json'
                 }
             });
-
+            outingAddedListener();
+            setAddingOuting(false);
             console.log('New Golf Outing:', response.data);
 
         } catch (error) {
@@ -90,7 +90,7 @@ const AddGolfOuting = ({ selectedCourse }) => {
                     ))}
                 </tr>
             )}
-            {!addingOuting && selectedCourse &&<button onClick={handleButtonClick} className='add-golf-outing-button'>Add Golf Outing</button>}
+            {!addingOuting && selectedCourse && <button onClick={handleButtonClick} className='add-golf-outing-button'>Add Golf Outing</button>}
             {addingOuting && <button onClick={handleButtonClick} className='cancel-golf-outing-button'>Cancel</button>}
             {addingOuting && <button onClick={handleFinishedClick} className='submit-golf-outing-button'>Submit</button>}
         </>

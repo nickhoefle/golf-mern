@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useCallback } from 'react';
 import axios from 'axios';
 import CourseReview from './CourseReview';
 import AddGolfOuting from './AddGolfOuting';
@@ -10,57 +10,60 @@ const ViewScoreCard = () => {
     const [selectedCourse, setSelectedCourse] = useState(null);
     const [outingsAtCourse, setOutingsAtCourse] = useState([]);
     const [sortBy, setSortBy] = useState('newest');
-    const [filterBy, setFilterBy] = useState('all'); 
+    const [filterBy, setFilterBy] = useState('all');
     const [userEmail, setUserEmail] = useState('');
+    const [addingOuting, setAddingOuting] = useState(false);
+
+    const fetchGolfCourses = async () => {
+        try {
+            const response = await axios.get('/api/golf-courses');
+            setGolfCourses(response.data);
+        } catch (error) {
+            console.error('Error fetching golf courses:', error);
+        }
+    };
+
+    const fetchGolfOutings = useCallback(async (courseId) => {
+        try {
+            const response = await axios.get(`/api/golf-outings/course/${courseId}`);
+
+            const outingsData = response.data.map(outing => ({
+                date: outing.date.slice(0, 10),
+                user: outing.user,
+                scores: outing.scores
+            }));
+
+            let filteredOutings = [...outingsData];
+            if (filterBy === userEmail) {
+                filteredOutings = filteredOutings.filter(outing => outing.user === userEmail);
+            }
+
+            const sortedOutings = filteredOutings.sort((a, b) => {
+                return sortBy === 'newest' ? new Date(b.date) - new Date(a.date) : new Date(a.date) - new Date(b.date);
+            });
+
+            setOutingsAtCourse(sortedOutings);
+
+        } catch (error) {
+            console.error('Error fetching golf outings:', error);
+            setOutingsAtCourse([]);
+        }
+    }, [sortBy, filterBy, userEmail]);
 
     useEffect(() => {
-        const auth = getAuth(); 
-        setUserEmail(auth.currentUser.email)
+        const auth = getAuth();
+        setUserEmail(auth.currentUser.email);
     }, []);
 
     useEffect(() => {
-        const fetchGolfCourses = async () => {
-            try {
-                const response = await axios.get('/api/golf-courses');
-                setGolfCourses(response.data);
-            } catch (error) {
-                console.error('Error fetching golf courses:', error);
-            }
-        };
         fetchGolfCourses();
     }, []);
 
     useEffect(() => {
-        const fetchGolfOutings = async () => {
-            try {
-                if (selectedCourse) {
-                    const response = await axios.get(`/api/golf-outings/course/${selectedCourse._id}`);
-                    
-                    const outingsData = response.data.map(outing => ({
-                        date: outing.date.slice(0, 10), 
-                        user: outing.user,
-                        scores: outing.scores
-                    }));
-
-                    let filteredOutings = [...outingsData];
-                    if (filterBy === userEmail) {
-                        filteredOutings = filteredOutings.filter(outing => outing.user === userEmail);
-                    }
-
-                    const sortedOutings = filteredOutings.sort((a, b) => {
-                        return sortBy === 'newest' ? new Date(b.date) - new Date(a.date) : new Date(a.date) - new Date(b.date);
-                    });
-
-                    setOutingsAtCourse(sortedOutings);
-                    
-                }
-            } catch (error) {
-                console.error('Error fetching golf outings:', error);
-            }
-        };
-
-        fetchGolfOutings();
-    }, [selectedCourse, sortBy, filterBy, userEmail]); 
+        if (selectedCourse) {
+            fetchGolfOutings(selectedCourse._id);
+        }
+    }, [selectedCourse, fetchGolfOutings]); // Include fetchGolfOutings in dependency array
 
     const handleSelectedCourseChange = (event) => {
         const selectedCourseId = event.target.value;
@@ -69,8 +72,8 @@ const ViewScoreCard = () => {
     };
 
     const openEditPage = (selectedCourse) => {
-        window.location.href=`/edit-golf-course?id=${selectedCourse._id}`;
-    }
+        window.location.href = `/edit-golf-course?id=${selectedCourse._id}`;
+    };
 
     const handleSortChange = (selectedSortBy) => {
         setSortBy(selectedSortBy);
@@ -78,6 +81,10 @@ const ViewScoreCard = () => {
 
     const handleFilterChange = (selectedFilterBy) => {
         setFilterBy(selectedFilterBy);
+    };
+
+    const outingAddedListener = () => {
+        fetchGolfOutings(selectedCourse._id);
     }
 
     return (
@@ -152,7 +159,7 @@ const ViewScoreCard = () => {
                                         ))}
                                     </tr>
                                 ))}
-                                <AddGolfOuting selectedCourse={selectedCourse} />
+                                <AddGolfOuting selectedCourse={selectedCourse} outingAddedListener={outingAddedListener} addingOuting={addingOuting} setAddingOuting={setAddingOuting}/>
                             </tbody>
                         </table>
                     </div>
