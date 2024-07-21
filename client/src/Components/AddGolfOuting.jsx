@@ -66,8 +66,11 @@ const AddGolfOuting = ({ selectedCourse }) => {
         <>
             {addingOuting && (
                 <tr>
-                    <td style={{ display: 'flex', flexDirection: 'column'}}>
-                        {user}
+                    <td style={{ display: 'flex', flexDirection: 'column', width: '250px'}}>
+                        <input
+                            value={user}
+                            onChange={(e) => setUser(e.target.value)}
+                        />
                         <input
                             type="date"
                             value={outingDate}
@@ -81,7 +84,7 @@ const AddGolfOuting = ({ selectedCourse }) => {
                                 type="number"
                                 value={scores[index]}
                                 onChange={(e) => handleScoreChange(index, e.target.value)}
-                                style={{ width: '50px', fontSize: '18px', textAlign: 'center' }}
+                                style={{ width: '37.5px', fontSize: '18px', textAlign: 'center' }}
                             />
                         </td>
                     ))}

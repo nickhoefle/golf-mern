@@ -152,13 +152,12 @@ const ViewScoreCard = () => {
                                         ))}
                                     </tr>
                                 ))}
+                                <AddGolfOuting selectedCourse={selectedCourse} />
                             </tbody>
                         </table>
-                        
                     </div>
                 )}
             </div>   
-            <AddGolfOuting selectedCourse={selectedCourse} />
             { selectedCourse && <SortAndFilterOutings onSortChange={handleSortChange} onFilterChange={handleFilterChange} userEmail={userEmail}/> }
             { selectedCourse && <CourseReview course={selectedCourse} />}
         </>
