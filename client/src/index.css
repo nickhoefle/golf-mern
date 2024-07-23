@@ -194,6 +194,11 @@ body {
   width: auto;
 }
 
+.golf-course-select {
+  font-size: 20px;
+  padding: 5px;
+}
+
 .hole-par-line {
   margin-top: 12px;
 }
@@ -341,6 +346,7 @@ body {
 .sidebar-wrapper {
   background-color: white;
   border-left: 5px solid black;
+  width: 25%;
 }
 
 .sidebar-wrapper h1, 

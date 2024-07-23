@@ -92,7 +92,7 @@ const ViewScoreCard = () => {
             <div className='view-course-info-wrapper'>
                 <label>Golf Course: </label>
                 <select 
-                    id="golf-course-select" 
+                    className="golf-course-select" 
                     value={selectedCourse ? selectedCourse._id : ''} 
                     onChange={handleSelectedCourseChange}
                 >
