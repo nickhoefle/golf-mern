@@ -65,6 +65,23 @@ code {
   justify-content: center;
 }
 
+.add-outing-calendar {
+  width: 150px; 
+  font-size: 16px;
+}
+
+.add-outing-email-date-cell {
+  display: flex; 
+  flex-direction: column; 
+  width: 250px;
+}
+
+.add-outing-hole-score-cell {
+  width: 37.5px; 
+  font-size: 18px; 
+  text-align: center;
+}
+
 .add-teebox-button {
   background-color: white;
   margin-top: 18px;

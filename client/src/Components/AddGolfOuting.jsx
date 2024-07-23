@@ -12,13 +12,13 @@ const AddGolfOuting = ({ selectedCourse, outingAddedListener, addingOuting, setA
         setUser(auth.currentUser.email)
     }, []);
 
-    const handleButtonClick = () => {
+    const handleAddOutingButtonClick = () => {
         setAddingOuting(!addingOuting);
     };
 
-    const handleScoreChange = (index, value) => {
+    const handleScoreChange = (index, score) => {
         const newScores = [...scores];
-        newScores[index] = value;
+        newScores[index] = score;
         setScores(newScores);
     };
 
@@ -27,14 +27,14 @@ const AddGolfOuting = ({ selectedCourse, outingAddedListener, addingOuting, setA
     };
 
     const handleFinishedClick = async () => {
+        
         const parsedScores = scores.map(score => parseInt(score));
-
+        
         for (const [index, score] of parsedScores.entries()) {
             if (score > 15) {
                 const holeNumber = index + 1;
                 const confirmed = window.confirm(`Your score for Hole ${holeNumber} seems high. Proceed?`);
                 if (!confirmed) {
-                    console.log('User canceled.');
                     return;
                 }
             }
@@ -44,21 +44,20 @@ const AddGolfOuting = ({ selectedCourse, outingAddedListener, addingOuting, setA
             user: user,
             course: selectedCourse,
             scores: parsedScores,
-            date: outingDate, // Include outing date in the data
+            date: outingDate, 
         };
 
         try {
-            const response = await axios.post('/api/golf-outings', outingData, {
-                headers: {
-                    'Content-Type': 'application/json'
-                }
-            });
-            outingAddedListener();
-            setAddingOuting(false);
-            setScores([]);
-            setOutingDate('');
-            console.log('New Golf Outing:', response.data);
-
+                const response = await axios.post('/api/golf-outings', outingData, {
+                    headers: {
+                        'Content-Type': 'application/json'
+                    }
+                });
+                outingAddedListener();
+                setAddingOuting(false);
+                setScores([]);
+                setOutingDate('');
+                console.log('New Golf Outing:', response.data);
         } catch (error) {
             console.error('Error creating golf outing:', error.message);
         }
@@ -68,7 +67,7 @@ const AddGolfOuting = ({ selectedCourse, outingAddedListener, addingOuting, setA
         <>
             {addingOuting && (
                 <tr>
-                    <td style={{ display: 'flex', flexDirection: 'column', width: '250px'}}>
+                    <td className='add-outing-email-date-cell'>
                         <input
                             value={user}
                             onChange={(e) => setUser(e.target.value)}
@@ -77,7 +76,7 @@ const AddGolfOuting = ({ selectedCourse, outingAddedListener, addingOuting, setA
                             type="date"
                             value={outingDate}
                             onChange={handleDateChange}
-                            style={{ width: '150px', fontSize: '16px' }} // Adjust styling as needed
+                            className='add-outing-calendar'
                         />
                     </td>
                     {Array.from({ length: selectedCourse.holes }).map((_, index) => (
@@ -86,15 +85,39 @@ const AddGolfOuting = ({ selectedCourse, outingAddedListener, addingOuting, setA
                                 type="number"
                                 value={scores[index]}
                                 onChange={(e) => handleScoreChange(index, e.target.value)}
-                                style={{ width: '37.5px', fontSize: '18px', textAlign: 'center' }}
+                                className='add-outing-hole-score-cell'
                             />
                         </td>
                     ))}
                 </tr>
             )}
-            {!addingOuting && selectedCourse && <button onClick={handleButtonClick} className='add-golf-outing-button'>Add Golf Outing</button>}
-            {addingOuting && <button onClick={handleButtonClick} className='cancel-golf-outing-button'>Cancel</button>}
-            {addingOuting && <button onClick={handleFinishedClick} className='submit-golf-outing-button'>Submit</button>}
+            
+            {!addingOuting && selectedCourse && 
+                <button 
+                    onClick={handleAddOutingButtonClick} 
+                    className='add-golf-outing-button'
+                >
+                    Add Golf Outing
+                </button>
+            }
+            
+            {addingOuting && 
+                <button 
+                    onClick={handleAddOutingButtonClick} 
+                    className='cancel-golf-outing-button'
+                >
+                    Cancel
+                </button>
+            }
+
+            {addingOuting && 
+                <button 
+                    onClick={handleFinishedClick} 
+                    className='submit-golf-outing-button'
+                >
+                    Submit
+                </button>
+            }
         </>
     );
 };
