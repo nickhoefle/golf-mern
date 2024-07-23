@@ -55,6 +55,8 @@ const AddGolfOuting = ({ selectedCourse, outingAddedListener, addingOuting, setA
             });
             outingAddedListener();
             setAddingOuting(false);
+            setScores([]);
+            setOutingDate('');
             console.log('New Golf Outing:', response.data);
 
         } catch (error) {
