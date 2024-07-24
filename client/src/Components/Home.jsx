@@ -4,10 +4,8 @@ import Sidebar from './Sidebar';
 
 const Home = () => {
     return (
-        <div style={{display: 'flex'}}> 
-            <div style={{width: '75%', backgroundColor: 'white', padding: '20px'}}>
-                <ViewCourseInfo />
-            </div>
+        <div className='index-content-wrapper'> 
+            <ViewCourseInfo />
             <Sidebar />
         </div>
     );

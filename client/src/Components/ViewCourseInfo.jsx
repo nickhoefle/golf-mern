@@ -88,7 +88,7 @@ const ViewScoreCard = () => {
     }
 
     return (
-        <>
+        <div className='view-course-info-container'>
             <div className='view-course-info-wrapper'>
                 <label>Golf Course: </label>
                 <select 
@@ -167,7 +167,7 @@ const ViewScoreCard = () => {
             </div>   
             { selectedCourse && <SortAndFilterOutings onSortChange={handleSortChange} onFilterChange={handleFilterChange} userEmail={userEmail}/> }
             { selectedCourse && <CourseReview course={selectedCourse} />}
-        </>
+        </div>
     );
 };
 

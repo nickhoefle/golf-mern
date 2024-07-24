@@ -228,6 +228,10 @@ body {
   padding: 5px;
 }
 
+.index-content-wrapper {
+  display: flex;
+}
+
 .my-review-category-label {
   font-weight: bold;
   text-decoration: underline;
@@ -537,6 +541,12 @@ body {
   width: 420px;
   justify-content: space-between;
   padding-bottom: 20px;
+}
+
+.view-course-info-container {
+  width: 75%; 
+  background-color: white; 
+  padding: 20px;
 }
 
 .view-course-info-wrapper p {
