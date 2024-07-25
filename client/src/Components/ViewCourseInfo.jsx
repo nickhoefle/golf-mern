@@ -41,7 +41,7 @@ const ViewScoreCard = () => {
             const sortedOutings = filteredOutings.sort((a, b) => {
                 return sortBy === 'newest' ? new Date(b.date) - new Date(a.date) : new Date(a.date) - new Date(b.date);
             });
-
+            
             setOutingsAtCourse(sortedOutings);
 
         } catch (error) {
@@ -63,7 +63,7 @@ const ViewScoreCard = () => {
         if (selectedCourse) {
             fetchGolfOutings(selectedCourse._id);
         }
-    }, [selectedCourse, fetchGolfOutings]); // Include fetchGolfOutings in dependency array
+    }, [selectedCourse, fetchGolfOutings]); 
 
     const handleSelectedCourseChange = (event) => {
         const selectedCourseId = event.target.value;
@@ -165,8 +165,21 @@ const ViewScoreCard = () => {
                     </div>
                 )}
             </div>   
-            { selectedCourse && <SortAndFilterOutings onSortChange={handleSortChange} onFilterChange={handleFilterChange} userEmail={userEmail}/> }
-            { selectedCourse && <CourseReview course={selectedCourse} />}
+            
+            { selectedCourse && 
+                <SortAndFilterOutings 
+                    onSortChange={handleSortChange} 
+                    onFilterChange={handleFilterChange} 
+                    userEmail={userEmail}
+                /> 
+            }
+
+            { selectedCourse && 
+                <CourseReview 
+                    course={selectedCourse} 
+                />
+            }
+
         </div>
     );
 };
