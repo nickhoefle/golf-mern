@@ -4,12 +4,12 @@ const SortAndFilterOutings = ({ onSortChange, onFilterChange, userEmail }) => {
 
     const handleSortChange = (e) => {
         const selectedSortBy = e.target.value;
-        onSortChange(selectedSortBy); // Trigger the sort in parent component
+        onSortChange(selectedSortBy); 
     };
 
     const handleFilterChange = (e) => {
         const selectedFilterBy = e.target.value;
-        onFilterChange(selectedFilterBy); // Trigger the filter in parent component
+        onFilterChange(selectedFilterBy); 
     };
 
     return (

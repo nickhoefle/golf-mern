@@ -232,6 +232,18 @@ body {
   display: flex;
 }
 
+.map-icon-and-address-wrapper {
+  display: flex;
+  align-items: center;
+}
+
+.map-icon {
+  margin-right: 10px;
+  height: 35px;
+  width: auto;
+  cursor: pointer;
+}
+
 .my-review-category-label {
   font-weight: bold;
   text-decoration: underline;

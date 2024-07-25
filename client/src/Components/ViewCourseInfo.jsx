@@ -65,8 +65,8 @@ const ViewScoreCard = () => {
         }
     }, [selectedCourse, fetchGolfOutings]); 
 
-    const handleSelectedCourseChange = (event) => {
-        const selectedCourseId = event.target.value;
+    const handleSelectedCourseChange = (e) => {
+        const selectedCourseId = e.target.value;
         const selected = golfCourses.find(course => course._id === selectedCourseId);
         setSelectedCourse(selected || null);
     };
@@ -114,7 +114,15 @@ const ViewScoreCard = () => {
                             className='edit-pencil-svg'
                             onClick={() => openEditPage(selectedCourse)}
                         />
-                        <p>{selectedCourse.location}</p>
+                        <div className='map-icon-and-address-wrapper'>
+                            <img 
+                                className='map-icon'
+                                alt='map-icon'
+                                src='/images/map.svg'
+                                onClick={() => window.open(`https://google.com/maps/search/${selectedCourse.location}`, '_blank')}
+                            />
+                            <p>{selectedCourse.location}</p>
+                        </div>
                     </>
                 )}
 
@@ -159,7 +167,12 @@ const ViewScoreCard = () => {
                                         ))}
                                     </tr>
                                 ))}
-                                <AddGolfOuting selectedCourse={selectedCourse} outingAddedListener={outingAddedListener} addingOuting={addingOuting} setAddingOuting={setAddingOuting}/>
+                                <AddGolfOuting 
+                                    selectedCourse={selectedCourse} 
+                                    outingAddedListener={outingAddedListener} 
+                                    addingOuting={addingOuting} 
+                                    setAddingOuting={setAddingOuting}
+                                />
                             </tbody>
                         </table>
                     </div>
