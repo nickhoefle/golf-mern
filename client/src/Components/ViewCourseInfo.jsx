@@ -157,7 +157,12 @@ const ViewScoreCard = () => {
                                 ))}
                                 {outingsAtCourse.map((outing, index) => (
                                     <tr key={index}>
-                                        <td>
+                                        <td className='outing-info-cell'>
+                                            <img 
+                                                src='/images/pencil.svg'
+                                                className='edit-outing-icon'
+                                                height='16px'
+                                            />
                                             <span className='outing-date-and-user'>{outing.date} {outing.user}</span>
                                         </td>
                                         {outing.scores.map((score, scoreIndex) => (
