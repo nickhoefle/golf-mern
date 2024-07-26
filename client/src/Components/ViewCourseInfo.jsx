@@ -28,6 +28,7 @@ const ViewScoreCard = () => {
             const response = await axios.get(`/api/golf-outings/course/${courseId}`);
 
             const outingsData = response.data.map(outing => ({
+                id: outing._id,
                 date: outing.date.slice(0, 10),
                 user: outing.user,
                 scores: outing.scores
@@ -161,7 +162,7 @@ const ViewScoreCard = () => {
                                             <img 
                                                 src='/images/pencil.svg'
                                                 className='edit-outing-icon'
-                                                height='16px'
+                                                onClick={() => window.location.href = `/edit-golf-outing?id=${outing.id}`}
                                             />
                                             <span className='outing-date-and-user'>{outing.date} {outing.user}</span>
                                         </td>
