@@ -66,6 +66,20 @@ const ViewScoreCard = () => {
         }
     }, [selectedCourse, fetchGolfOutings]); 
 
+    useEffect(() => {
+        const queryParams = new URLSearchParams(window.location.search);
+        const courseId = queryParams.get('id');
+        const fetchCourseById = async () => {  
+            try {
+                const response = await axios.get(`/api/golf-courses/${courseId}`);
+                setSelectedCourse(response.data);
+            } catch(error) {
+                console.error('Error fetching outing data:', error);
+            }
+        }
+        fetchCourseById();
+    }, [])
+
     const handleSelectedCourseChange = (e) => {
         const selectedCourseId = e.target.value;
         const selected = golfCourses.find(course => course._id === selectedCourseId);
