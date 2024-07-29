@@ -192,6 +192,60 @@ body {
   font-weight: bold;
 }
 
+.edit-golf-outing-course-name {
+  font-size: 20px;
+}
+
+.edit-golf-outing-date {
+  width: 25%;
+  font-size: 20px;
+  border: 2px solid black;
+  border-radius: 5px;
+}
+
+.edit-golf-outing-email {
+  width: 60%;
+  font-size: 20px;
+  border: 2px solid black;
+  border-radius: 5px;
+  padding: 5px;
+}
+
+.edit-golf-outing-score {
+  width: 48px;
+  font-size: 20px;
+  border: 2px solid black;
+  border-radius: 5px;
+  padding: 5px;
+  margin: 12px 0 0 20px;
+}
+
+.edit-golf-outing-wrapper {
+  display: flex;
+  justify-content: center;
+  max-height: 92vh;
+}
+
+.edit-golf-outing-wrapper form {
+  display: flex;
+  flex-direction: column;
+  outline: 5px solid black;
+  width: 50%;
+  background-color: white;
+  padding: 20px;
+  overflow-y: auto;
+  margin: 20px;
+}
+
+.edit-golf-outing-wrapper h1 {
+  text-align: center;
+}
+
+.edit-golf-outing-wrapper label {
+  font-size: 20px;
+  font-weight: bold;
+}
+
 .edit-pencil-svg {
   height: 23px;
   margin-left: 12px;
