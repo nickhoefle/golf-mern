@@ -117,6 +117,14 @@ code {
   padding: 5px;
 }
 
+.auth-error-span {
+  font-size: 18px;
+  color: red;
+  margin-top: 20px;
+  font-weight: bold;
+  text-align: center;
+}
+
 body {
   background-image: url('./images/golf-course.jpg');
   background-size: cover; 

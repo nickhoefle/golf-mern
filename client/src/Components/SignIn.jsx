@@ -7,6 +7,7 @@ import PageTitle from './PageTitle';
 const SignIn = () => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    const [errorText, setErrorText] = useState('');
     const navigate = useNavigate();
 
     const signIn = async () => {
@@ -16,6 +17,9 @@ const SignIn = () => {
             navigate('/'); // Redirect to home page after sign-in
         } catch (error) {
             console.error('Error signing in:', error);
+            if (error.code === 'auth/invalid-credential') {
+                setErrorText('Incorrect password');
+            }
         }
     };
 
@@ -36,6 +40,7 @@ const SignIn = () => {
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
                 />
+                <span className='auth-error-span'>{errorText}</span>
                 <button onClick={signIn} className='submit-button'>
                     Sign In
                 </button>
