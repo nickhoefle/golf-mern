@@ -18,8 +18,8 @@ const SignIn = () => {
         } catch (error) {
             console.error('Error signing in:', error);
             if (error.code === 'auth/invalid-credential') {
-                setErrorText('Incorrect password');
-            }
+                setErrorText('Incorrect email or password.');
+            } 
         }
     };
 
