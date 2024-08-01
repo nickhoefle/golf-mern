@@ -117,12 +117,23 @@ code {
   padding: 5px;
 }
 
-.auth-error-span {
+.auth-info-text {
   font-size: 18px;
-  color: red;
-  margin-top: 20px;
+  margin: 10px 0 10px 0;
   font-weight: bold;
   text-align: center;
+}
+
+.back-to-sign-in-span {
+  font-size: 16px;
+  font-weight: bold;
+  text-align: center;
+  margin-top: 10px;
+  cursor: pointer;
+}
+
+.back-to-sign-in-span:hover {
+  text-decoration: underline;
 }
 
 body {
@@ -271,6 +282,14 @@ body {
 .filter-outings-icon {
   height: 20px;
   width: auto;
+}
+
+.forgot-password-span {
+  font-size: 16px;
+  font-weight: bold;
+  text-align: left;
+  margin-top: 10px;
+  cursor: pointer;
 }
 
 .golf-course-select {
