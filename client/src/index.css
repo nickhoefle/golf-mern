@@ -168,6 +168,12 @@ body {
   padding: 5px;
 }
 
+.delete-outing-icon {
+  height: 26px;
+  background-color: white;
+  cursor: pointer;
+}
+
 .delete-tee-box-button {
   background-color: #f78282;
   width: 100%;
@@ -183,6 +189,11 @@ body {
 
 .delete-tee-box-button:hover {
   background-color: #d46f6f;
+}
+
+.edit-delete-outing-icons-wrapper {
+  display: flex;
+  align-items: center;
 }
 
 .edit-golf-course-wrapper {
@@ -266,7 +277,7 @@ body {
 }
 
 .edit-pencil-svg {
-  height: 23px;
+  height: 28px;
   margin-left: 12px;
   background-color: white;
   cursor: pointer;
@@ -397,15 +408,17 @@ body {
   position: block;
 }
 
-.outing-info-cell img.edit-outing-icon {
+.outing-info-cell img.edit-outing-icon,
+.outing-info-cell img.delete-outing-icon {
   display: none; 
 }
 
-.outing-info-cell:hover img.edit-outing-icon {
+.outing-info-cell:hover img.edit-outing-icon,
+.outing-info-cell:hover img.delete-outing-icon {
   display: inline;
-  margin-right: 10px;
+  margin-right: 6px;
   cursor: pointer;
-  height: 18px;
+  height: 24px;
 }
 
 .page-title-wrapper {

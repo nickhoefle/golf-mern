@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { getAuth } from 'firebase/auth';
 
-const AddGolfOuting = ({ selectedCourse, outingAddedListener, addingOuting, setAddingOuting }) => {
+const AddGolfOuting = ({ selectedCourse, outingAddedOrDeletedListener, addingOuting, setAddingOuting }) => {
     const [user, setUser] = useState('');
     const [scores, setScores] = useState([]);
     const [outingDate, setOutingDate] = useState('');
@@ -53,7 +53,7 @@ const AddGolfOuting = ({ selectedCourse, outingAddedListener, addingOuting, setA
                         'Content-Type': 'application/json'
                     }
                 });
-                outingAddedListener();
+                outingAddedOrDeletedListener();
                 setAddingOuting(false);
                 setScores([]);
                 setOutingDate('');

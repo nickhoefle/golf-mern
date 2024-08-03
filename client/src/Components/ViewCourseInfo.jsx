@@ -98,9 +98,32 @@ const ViewScoreCard = () => {
         setFilterBy(selectedFilterBy);
     };
 
-    const outingAddedListener = () => {
+    const outingAddedOrDeletedListener = () => {
         fetchGolfOutings(selectedCourse._id);
     }
+
+    const handleDeleteOuting = async (outingId, user, date) => {
+        const confirmation = window.confirm(`Are you sure you want to delete ${user}'s outing from ${date}?`);
+        if (confirmation) {
+            try {
+                const response = await fetch(`/api/golf-outings/${outingId}`, {
+                    method: 'DELETE',
+                    headers: { 'Content-Type': 'application/json' },
+                });
+    
+                if (!response.ok) {
+                    throw new Error(`Error: ${response.statusText}`);
+                }
+    
+                outingAddedOrDeletedListener();
+                
+            } catch (error) {
+                console.error('Error deleting golf outing:', error);
+            }
+        } else {
+            return;
+        }
+    };
 
     return (
         <div className='view-course-info-container'>
@@ -134,7 +157,9 @@ const ViewScoreCard = () => {
                                 className='map-icon'
                                 alt='map-icon'
                                 src='/images/map.svg'
-                                onClick={() => window.open(`https://google.com/maps/search/${selectedCourse.location}`, '_blank')}
+                                onClick={
+                                    () => window.open(`https://google.com/maps/search/${selectedCourse.location}`, '_blank')
+                                }
                             />
                             <p>{selectedCourse.location}</p>
                         </div>
@@ -173,12 +198,21 @@ const ViewScoreCard = () => {
                                 {outingsAtCourse.map((outing, index) => (
                                     <tr key={index}>
                                         <td className='outing-info-cell'>
-                                            <img 
-                                                src='/images/pencil.svg'
-                                                className='edit-outing-icon'
-                                                onClick={() => window.location.href = `/edit-golf-outing?id=${outing.id}`}
-                                            />
-                                            <span className='outing-date-and-user'>{outing.date} {outing.user}</span>
+                                            <div className='edit-delete-outing-icons-wrapper'>
+                                                <img 
+                                                    src='/images/pencil.svg'
+                                                    className='edit-outing-icon'
+                                                    alt='edit-outing'
+                                                    onClick={() => window.location.href = `/edit-golf-outing?id=${outing.id}`}
+                                                />
+                                                <img 
+                                                    src='/images/trash.svg'
+                                                    className='delete-outing-icon'
+                                                    alt='delete-outing'
+                                                    onClick={() => handleDeleteOuting(outing.id, outing.user, outing.date)}
+                                                />                                            
+                                                <span className='outing-date-and-user'>{outing.date} {outing.user}</span>
+                                            </div>
                                         </td>
                                         {outing.scores.map((score, scoreIndex) => (
                                             <td key={scoreIndex}>
@@ -189,7 +223,7 @@ const ViewScoreCard = () => {
                                 ))}
                                 <AddGolfOuting 
                                     selectedCourse={selectedCourse} 
-                                    outingAddedListener={outingAddedListener} 
+                                    outingAddedOrDeletedListener={outingAddedOrDeletedListener} 
                                     addingOuting={addingOuting} 
                                     setAddingOuting={setAddingOuting}
                                 />
