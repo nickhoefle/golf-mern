@@ -9,8 +9,8 @@ function AddGolfCourse() {
     const [amountOfTeeBoxes, setAmountOfTeeBoxes] = useState('');
     const [teeBoxDetails, setTeeBoxDetails] = useState([]);
 
-    const handleSubmit = async (event) => {
-        event.preventDefault();
+    const handleSubmit = async (e) => {
+        e.preventDefault();
 
         if (!name) {
             alert('Please enter a name for the course.');
@@ -48,21 +48,16 @@ function AddGolfCourse() {
 
         try {
             await axios.post('/api/golf-courses', newGolfCourse);
-            setName('');
-            setLocation('');
-            setHoles('');
-            setPars([]);
-            setAmountOfTeeBoxes('');
-            setTeeBoxDetails([]);
+            window.location.href = '/';
         } catch (error) {
-            console.error('There was an error adding the golf course!', error);
+            console.error('Error adding golf course.', error);
         }
     };
 
-    const handleTeeBoxesChange = (e) => {
-        const numTeeBoxes = parseInt(e.target.value);
-        setAmountOfTeeBoxes(numTeeBoxes);
-        const initialTeeBoxDetails = Array.from({ length: numTeeBoxes }, () => ({
+    const handleTeeBoxAmountChange = (e) => {
+        const numberOfTeeBoxes = parseInt(e.target.value);
+        setAmountOfTeeBoxes(numberOfTeeBoxes);
+        const initialTeeBoxDetails = Array.from({ length: numberOfTeeBoxes }, () => ({
             color: '',
             yardages: Array(parseInt(holes)).fill('')
         }));
@@ -70,16 +65,16 @@ function AddGolfCourse() {
     };
 
     const handleTeeBoxDetailChange = (index, field, value) => {
-        setTeeBoxDetails(prevDetails => {
-            const updatedDetails = [...prevDetails];
-            if (field === 'color') {
-                updatedDetails[index].color = value;
-            } else {
-                const yardageIndex = parseInt(field);
-                updatedDetails[index].yardages[yardageIndex] = value;
-            }
-            return updatedDetails;
-        });
+        const updatedTeeBoxDetails = [...teeBoxDetails];
+        
+        if (field === 'color') {
+            updatedTeeBoxDetails[index].color = value;
+        } else {
+            const yardageIndex = parseInt(field);
+            updatedTeeBoxDetails[index].yardages[yardageIndex] = value;
+        }
+    
+        setTeeBoxDetails(updatedTeeBoxDetails);
     };
 
     const handleParsChange = (holeIndex, value) => {
@@ -129,17 +124,18 @@ function AddGolfCourse() {
                                 <input
                                     className='par-input'
                                     type="number"
+                                    min={3}
+                                    max={5}
                                     value={pars[holeIndex] || ''}
                                     onChange={(e) => handleParsChange(holeIndex, e.target.value)}
                                 />
                             </div>
                         ))}
-                        <div> </div>
                         <label className='amount-of-teeboxes-label'>Tee Boxes:</label>
                         <select
                             className='amount-of-teeboxes-dropdown'
                             value={amountOfTeeBoxes}
-                            onChange={handleTeeBoxesChange}
+                            onChange={handleTeeBoxAmountChange}
                         >
                             <option value="">Number of Tee Boxes</option>
                             <option value="1">1</option>
