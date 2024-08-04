@@ -4,6 +4,7 @@ import CourseReview from './CourseReview';
 import AddGolfOuting from './AddGolfOuting';
 import SortAndFilterOutings from './SortAndFilterOutings';
 import { getAuth } from 'firebase/auth';
+import DeleteGolfOuting from './DeletingGolfOuting';
 
 const ViewScoreCard = () => {
     const [golfCourses, setGolfCourses] = useState([]);
@@ -102,29 +103,6 @@ const ViewScoreCard = () => {
         fetchGolfOutings(selectedCourse._id);
     }
 
-    const handleDeleteOuting = async (outingId, user, date) => {
-        const confirmation = window.confirm(`Are you sure you want to delete ${user}'s outing from ${date}?`);
-        if (confirmation) {
-            try {
-                const response = await fetch(`/api/golf-outings/${outingId}`, {
-                    method: 'DELETE',
-                    headers: { 'Content-Type': 'application/json' },
-                });
-    
-                if (!response.ok) {
-                    throw new Error(`Error: ${response.statusText}`);
-                }
-    
-                outingAddedOrDeletedListener();
-                
-            } catch (error) {
-                console.error('Error deleting golf outing:', error);
-            }
-        } else {
-            return;
-        }
-    };
-
     return (
         <div className='view-course-info-container'>
             <div className='view-course-info-wrapper'>
@@ -205,19 +183,17 @@ const ViewScoreCard = () => {
                                                     alt='edit-outing'
                                                     onClick={() => window.location.href = `/edit-golf-outing?id=${outing.id}`}
                                                 />
-                                                <img 
-                                                    src='/images/trash.svg'
-                                                    className='delete-outing-icon'
-                                                    alt='delete-outing'
-                                                    onClick={() => handleDeleteOuting(outing.id, outing.user, outing.date)}
-                                                />                                            
+                                                <DeleteGolfOuting
+                                                    outingId={outing.id}
+                                                    outingUser={outing.user}
+                                                    outingDate={outing.date}
+                                                    outingAddedOrDeletedListener={outingAddedOrDeletedListener}
+                                                />                                         
                                                 <span className='outing-date-and-user'>{outing.date} {outing.user}</span>
                                             </div>
                                         </td>
                                         {outing.scores.map((score, scoreIndex) => (
-                                            <td key={scoreIndex}>
-                                                {score}
-                                            </td>
+                                            <td key={scoreIndex}>{score}</td>
                                         ))}
                                     </tr>
                                 ))}
