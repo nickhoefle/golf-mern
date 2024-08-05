@@ -65,6 +65,23 @@ code {
   justify-content: center;
 }
 
+.add-new-course-icon {
+  height: 25px;
+  margin: 0 8px 0 12px;
+}
+
+.add-new-course-link-wrapper {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  cursor: pointer;
+  width: fit-content;
+}
+
+.add-new-course-link-wrapper:hover {
+  text-decoration: underline;
+}
+
 .add-outing-calendar {
   width: 150px; 
   font-size: 16px;
