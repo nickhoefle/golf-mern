@@ -6,6 +6,7 @@ import SortAndFilterOutings from './SortAndFilterOutings';
 import { getAuth } from 'firebase/auth';
 import DeleteGolfOuting from './DeletingGolfOuting';
 import MapIconAndLink from './MapIconAndLink';
+import AddNewCourseLink from './AddNewCourseLink';
 
 const ViewScoreCard = () => {
     const [golfCourses, setGolfCourses] = useState([]);
@@ -124,14 +125,7 @@ const ViewScoreCard = () => {
                     ))}
                 </select>
                 {!selectedCourse && (
-                    <div className='add-new-course-link-wrapper'>
-                        <img
-                            className='add-new-course-icon'
-                            src='/images/add.svg'
-                            alt='add-new-golf-course'
-                        />
-                        <p>Add New Golf Course</p>
-                    </div>
+                    <AddNewCourseLink />
                 )}
                 {selectedCourse && (
                     <>
@@ -219,9 +213,7 @@ const ViewScoreCard = () => {
             }
 
             { selectedCourse && 
-                <CourseReview 
-                    course={selectedCourse} 
-                />
+                <CourseReview course={selectedCourse} />
             }
 
         </div>
