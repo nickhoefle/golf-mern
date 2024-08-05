@@ -3,7 +3,7 @@ import axios from 'axios';
 
 function AddGolfCourse() {
     const [name, setName] = useState('');
-    const [location, setLocation] = useState('');
+    const [address, setAddress] = useState('');
     const [holes, setHoles] = useState('');
     const [pars, setPars] = useState('');
     const [amountOfTeeBoxes, setAmountOfTeeBoxes] = useState('');
@@ -15,7 +15,7 @@ function AddGolfCourse() {
         if (!name) {
             alert('Please enter a name for the course.');
             return;
-        } else if (!location) {
+        } else if (!address) {
             alert('Please enter an address for the course.');
             return;
         } else if (!holes) {
@@ -37,7 +37,7 @@ function AddGolfCourse() {
 
         const newGolfCourse = {
             name,
-            location,
+            address,
             holes: parseInt(holes),
             pars: pars.map(par => parseInt(par)),
             teeBoxes: teeBoxDetails.map(box => ({
@@ -94,12 +94,12 @@ function AddGolfCourse() {
                     value={name}
                     onChange={(e) => setName(e.target.value)}
                 />
-                <label>Location:</label>
+                <label>Address:</label>
                 <input
-                    className='course-location-input'
+                    className='course-address-input'
                     type="text"
-                    value={location}
-                    onChange={(e) => setLocation(e.target.value)}
+                    value={address}
+                    onChange={(e) => setAddress(e.target.value)}
                 />
                 <label>Holes:</label>
                 <select

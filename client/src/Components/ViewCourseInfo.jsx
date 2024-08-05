@@ -127,7 +127,7 @@ const ViewScoreCard = () => {
                 {selectedCourse && (
                     <>
                         <EditGolfCourseLink selectedCourse={selectedCourse} />
-                        <MapIconAndLink location={selectedCourse.location} />
+                        <MapIconAndLink address={selectedCourse.address} />
                     </>
                 )}
 

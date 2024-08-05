@@ -5,7 +5,7 @@ const EditCourseInfo = () => {
     const [initialCourseData, setInitialCourseData] = useState({});
     const [formData, setFormData] = useState({
         name: '',
-        location: '',
+        address: '',
         holes: '',
         pars: [],
         teeBoxes: [],
@@ -21,7 +21,7 @@ const EditCourseInfo = () => {
                     setInitialCourseData(response.data);
                     setFormData({
                         name: response.data.name,
-                        location: response.data.location,
+                        address: response.data.address,
                         holes: response.data.holes.toString(),
                         pars: response.data.pars || [],
                         teeBoxes: response.data.teeBoxes || [],
@@ -88,12 +88,12 @@ const EditCourseInfo = () => {
                     value={formData.name}
                     onChange={handleInputChange}
                 />
-                <label>Location:</label>
+                <label>Address:</label>
                 <input
-                    className='course-location-input'
+                    className='course-address-input'
                     type="text"
-                    name="location"
-                    value={formData.location}
+                    name="address"
+                    value={formData.address}
                     onChange={handleInputChange}
                 />
                 <div>
