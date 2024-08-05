@@ -1,12 +1,13 @@
 import React, { useEffect, useState, useCallback } from 'react';
-import axios from 'axios';
-import CourseReview from './CourseReview';
-import AddGolfOuting from './AddGolfOuting';
-import SortAndFilterOutings from './SortAndFilterOutings';
 import { getAuth } from 'firebase/auth';
-import DeleteGolfOuting from './DeletingGolfOuting';
-import MapIconAndLink from './MapIconAndLink';
+import axios from 'axios';
+import AddGolfOuting from './AddGolfOuting';
 import AddNewCourseLink from './AddNewCourseLink';
+import CourseReview from './CourseReview';
+import DeleteGolfOuting from './DeletingGolfOuting';
+import EditGolfCourseLink from './EditGolfCourseLink';
+import MapIconAndLink from './MapIconAndLink';
+import SortAndFilterOutings from './SortAndFilterOutings';
 
 const ViewScoreCard = () => {
     const [golfCourses, setGolfCourses] = useState([]);
@@ -89,10 +90,6 @@ const ViewScoreCard = () => {
         setSelectedCourse(selected || null);
     };
 
-    const openEditPage = (selectedCourse) => {
-        window.location.href = `/edit-golf-course?id=${selectedCourse._id}`;
-    };
-
     const handleSortChange = (selectedSortBy) => {
         setSortBy(selectedSortBy);
     };
@@ -129,12 +126,7 @@ const ViewScoreCard = () => {
                 )}
                 {selectedCourse && (
                     <>
-                        <img 
-                            src='/images/pencil.svg' 
-                            alt='pencil-svg'
-                            className='edit-pencil-svg'
-                            onClick={() => openEditPage(selectedCourse)}
-                        />
+                        <EditGolfCourseLink selectedCourse={selectedCourse} />
                         <MapIconAndLink location={selectedCourse.location} />
                     </>
                 )}
