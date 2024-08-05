@@ -1,6 +1,6 @@
 import React from 'react';
 
-const MapIconAndLink = ({ location }) => {
+const MapIconAndLink = ({ address }) => {
     return (
         <div className='map-icon-and-address-wrapper'>
             <img 
@@ -8,10 +8,10 @@ const MapIconAndLink = ({ location }) => {
                 alt='map-icon'
                 src='/images/map.svg'
                 onClick={
-                    () => window.open(`https://google.com/maps/search/${location}`, '_blank')
+                    () => window.open(`https://google.com/maps/search/${address}`, '_blank')
                 }
             />
-            <p>{location}</p>
+            <p>{address}</p>
         </div>
     );
 };
