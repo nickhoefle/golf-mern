@@ -5,6 +5,7 @@ import AddGolfOuting from './AddGolfOuting';
 import SortAndFilterOutings from './SortAndFilterOutings';
 import { getAuth } from 'firebase/auth';
 import DeleteGolfOuting from './DeletingGolfOuting';
+import MapIconAndLink from './MapIconAndLink';
 
 const ViewScoreCard = () => {
     const [golfCourses, setGolfCourses] = useState([]);
@@ -140,17 +141,7 @@ const ViewScoreCard = () => {
                             className='edit-pencil-svg'
                             onClick={() => openEditPage(selectedCourse)}
                         />
-                        <div className='map-icon-and-address-wrapper'>
-                            <img 
-                                className='map-icon'
-                                alt='map-icon'
-                                src='/images/map.svg'
-                                onClick={
-                                    () => window.open(`https://google.com/maps/search/${selectedCourse.location}`, '_blank')
-                                }
-                            />
-                            <p>{selectedCourse.location}</p>
-                        </div>
+                        <MapIconAndLink location={selectedCourse.location} />
                     </>
                 )}
 
