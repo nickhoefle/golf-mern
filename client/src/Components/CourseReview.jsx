@@ -93,6 +93,7 @@ const CourseReview = ({ course }) => {
                         <div key={`${ratingCategory}-${rating}`}>
                             <input
                                 type="radio"
+                                className='user-review-radio'
                                 id={`${ratingCategory}-${rating}`}
                                 name={ratingCategory}
                                 value={rating}

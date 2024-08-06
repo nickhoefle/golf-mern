@@ -554,7 +554,7 @@ body {
 .sort-and-filter-wrapper input[type='radio'] {
   width: 14px; 
   height: 14px;
-  margin-left: 10px;
+  margin: 0 2px 0 10px;
 }
 
 .sort-items-wrapper {
@@ -677,6 +677,10 @@ body {
   width: 420px;
   justify-content: space-between;
   padding-bottom: 20px;
+}
+
+.user-review-radio {
+  margin: 0 4px 0 4px;
 }
 
 .view-course-info-container {
