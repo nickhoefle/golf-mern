@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { getAuth } from 'firebase/auth';
+import { fetchAllReviews } from '../fetchFunctions/fetchAllReviews';
+import { fetchCourseReviewDataForUser } from '../fetchFunctions/fetchCourseReviewDataForUser';
 import axios from 'axios';
 
 const CourseReview = ({ course }) => {
@@ -24,49 +26,15 @@ const CourseReview = ({ course }) => {
     }, []);
 
     useEffect(() => {
-        const fetchReviewData = async () => {
-            try {
-                const response = await axios.get(`/api/course-reviews?course=${course._id}&user=${user}`);
-
-                if (response.data.length > 0) {
-                    const existingReview = response.data[0];
-                    setReviewData(existingReview);
-                } else {
-                    // If no review exists for the current course, reset reviewData
-                    setReviewData({
-                        _id: '',
-                        user: user,
-                        course: course._id,
-                        overallExperienceRating: 0,
-                        valueRating: 0,
-                        grassRating: 0,
-                        greensRating: 0,
-                        difficultyMatchesSkillRating: 0,
-                        congestionRating: 0
-                    });
-                }
-            } catch (error) {
-                console.error('Error fetching review data:', error);
-            }
-        };
-
-        fetchReviewData();
-    }, [course._id, user]); // Trigger fetchReviewData whenever course._id changes
+        if (activeTab === 'courseReviews') {
+            fetchAllReviews(course._id).then(setAllReviews);
+        }
+    }, [course._id, activeTab]); 
 
     useEffect(() => {
-        const fetchAllReviews = async () => {
-            try {
-                const response = await axios.get(`/api/course-reviews?course=${course._id}`);
-                setAllReviews(response.data);
-            } catch (error) {
-                console.error('Error fetching all reviews:', error);
-            }
-        };
-
-        if (activeTab === 'courseReviews') {
-            fetchAllReviews();
-        }
-    }, [course._id, activeTab]); // Trigger fetchAllReviews whenever course._id or activeTab changes
+        fetchCourseReviewDataForUser(course._id, user)
+            .then(data => setReviewData(data))
+    }, [course._id, user]);
 
     const handleRatingChange = (newRating, ratingCategory) => {
         const updatedReviewData = { ...reviewData, [ratingCategory]: newRating };
