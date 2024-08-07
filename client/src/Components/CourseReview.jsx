@@ -1,12 +1,14 @@
 import React, { useState, useEffect } from 'react';
+import { getAuth } from 'firebase/auth';
 import axios from 'axios';
 
 const CourseReview = ({ course }) => {
     const [allReviews, setAllReviews] = useState([]);
     const [activeTab, setActiveTab] = useState('courseReviews');
+    const [user, setUser] = useState('');
     const [reviewData, setReviewData] = useState({
         _id: '',
-        user: 'Nickhoefle',
+        user: user,
         course: course._id,
         overallExperienceRating: 0,
         valueRating: 0,
@@ -17,10 +19,14 @@ const CourseReview = ({ course }) => {
     });
 
     useEffect(() => {
+        const auth = getAuth(); 
+        setUser(auth.currentUser.email)
+    }, []);
+
+    useEffect(() => {
         const fetchReviewData = async () => {
             try {
-                const userEmail = 'Nickhoefle';
-                const response = await axios.get(`/api/course-reviews?course=${course._id}&user=${userEmail}`);
+                const response = await axios.get(`/api/course-reviews?course=${course._id}&user=${user}`);
 
                 if (response.data.length > 0) {
                     const existingReview = response.data[0];
@@ -29,7 +35,7 @@ const CourseReview = ({ course }) => {
                     // If no review exists for the current course, reset reviewData
                     setReviewData({
                         _id: '',
-                        user: userEmail,
+                        user: user,
                         course: course._id,
                         overallExperienceRating: 0,
                         valueRating: 0,
@@ -45,7 +51,7 @@ const CourseReview = ({ course }) => {
         };
 
         fetchReviewData();
-    }, [course._id]); // Trigger fetchReviewData whenever course._id changes
+    }, [course._id, user]); // Trigger fetchReviewData whenever course._id changes
 
     useEffect(() => {
         const fetchAllReviews = async () => {
