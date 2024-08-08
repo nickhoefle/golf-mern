@@ -8,6 +8,8 @@ import DeleteGolfOuting from './DeletingGolfOuting';
 import EditGolfCourseLink from './EditGolfCourseLink';
 import MapIconAndLink from './MapIconAndLink';
 import SortAndFilterOutings from './SortAndFilterOutings';
+import { fetchAllGolfCourses } from '../fetchFunctions/fetchAllGolfCourses';
+import { fetchCourseById } from '../fetchFunctions/fetchCourseById';
 
 const ViewScoreCard = () => {
     const [golfCourses, setGolfCourses] = useState([]);
@@ -17,15 +19,6 @@ const ViewScoreCard = () => {
     const [filterBy, setFilterBy] = useState('all');
     const [userEmail, setUserEmail] = useState('');
     const [addingOuting, setAddingOuting] = useState(false);
-
-    const fetchGolfCourses = async () => {
-        try {
-            const response = await axios.get('/api/golf-courses');
-            setGolfCourses(response.data);
-        } catch (error) {
-            console.error('Error fetching golf courses:', error);
-        }
-    };
 
     const fetchGolfOutings = useCallback(async (courseId) => {
         try {
@@ -61,7 +54,7 @@ const ViewScoreCard = () => {
     }, []);
 
     useEffect(() => {
-        fetchGolfCourses();
+        fetchAllGolfCourses().then(setGolfCourses);
     }, []);
 
     useEffect(() => {
@@ -71,18 +64,8 @@ const ViewScoreCard = () => {
     }, [selectedCourse, fetchGolfOutings]); 
 
     useEffect(() => {
-        const queryParams = new URLSearchParams(window.location.search);
-        const courseId = queryParams.get('id');
-        const fetchCourseById = async () => {  
-            try {
-                const response = await axios.get(`/api/golf-courses/${courseId}`);
-                setSelectedCourse(response.data);
-            } catch(error) {
-                console.error('Error fetching outing data:', error);
-            }
-        }
-        fetchCourseById();
-    }, [])
+        fetchCourseById().then(setSelectedCourse);
+    }, []);
 
     const handleSelectedCourseChange = (e) => {
         const selectedCourseId = e.target.value;
