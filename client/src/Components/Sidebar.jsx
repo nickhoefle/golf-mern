@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import axios from 'axios';
+import { fetchAllGolfOutings } from '../fetchFunctions/fetchAllGolfOutings';
+import { fetchCourseDetailsFromIds } from '../fetchFunctions/fetchCourseDetailsFromIds';
 
 const Sidebar = () => {
     const [golfOutings, setGolfOutings] = useState([]);
@@ -9,35 +10,13 @@ const Sidebar = () => {
     const [bogeys, setBogeys] = useState(new Set());
 
     useEffect(() => {
-        const fetchGolfOutings = async () => {
-            try {
-                const response = await axios.get('/api/golf-outings');
-                setGolfOutings(response.data);
-            } catch (error) {
-                console.error('Error fetching golf outings:', error);
-            }
-        };
-
-        fetchGolfOutings();
+        fetchAllGolfOutings().then(setGolfOutings);
     }, []);
 
     useEffect(() => {
-        const fetchCourseDetails = async (courseIds) => {
-            try {
-                const response = await axios.get(`/api/golf-courses?ids=${courseIds.join(',')}`);
-                const courseDetailsMap = {};
-                response.data.forEach(course => {
-                    courseDetailsMap[course._id] = course;
-                });
-                setCourseDetails(courseDetailsMap);
-            } catch (error) {
-                console.error('Error fetching course details:', error);
-            }
-        };
-
         if (golfOutings.length > 0) {
             const courseIds = golfOutings.map(outing => outing.course);
-            fetchCourseDetails(courseIds);
+            fetchCourseDetailsFromIds(courseIds).then(setCourseDetails);
         }
     }, [golfOutings]);
 
