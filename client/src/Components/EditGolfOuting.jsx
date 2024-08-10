@@ -1,4 +1,6 @@
 import React, { useState, useEffect } from 'react';
+import { fetchCourseById } from '../fetchFunctions/fetchCourseById';
+import { fetchGolfOutingById } from '../fetchFunctions/fetchGolfOutingById';
 import axios from 'axios';
 
 const EditGolfOuting = () => {
@@ -15,39 +17,23 @@ const EditGolfOuting = () => {
     const outingId = queryParams.get('id');
 
     useEffect(() => {
-        const fetchOutingData = async () => {  
-            try {
-                if (outingId) {
-                    const response = await axios.get(`/api/golf-outings/${outingId}`);
-                    const data = response.data;
-                    setOutingData(data);
-                    setFormData({
-                        user: data.user,
-                        course: data.course,
-                        scores: data.scores, 
-                        date: new Date(data.date).toISOString().split('T')[0] 
-                    });
-                } else {
-                    window.location.href = '/';
-                }
-            } catch (error) {
-                console.error('Error fetching outing data:', error);
+        fetchGolfOutingById(outingId).then(data => {
+            if (data) {
+                setOutingData(data);
+                setFormData({
+                    user: data.user,
+                    course: data.course,
+                    scores: data.scores,
+                    date: new Date(data.date).toISOString().split('T')[0]
+                });
+            } else {
+                window.location.href = '/';
             }
-        };
-
-        fetchOutingData();
+        });
     }, [outingId]);
 
     useEffect(() => {
-        const fetchCourseById = async (courseId) => {
-            try {
-                const response = await axios.get(`/api/golf-courses/${courseId}`);
-                setCourseName(response.data.name);
-            } catch (error) {
-                console.error('Error fetching outing data:', error);
-            }
-        };
-        fetchCourseById(formData.course);
+        fetchCourseById(formData.course).then(data => setCourseName(data?.name || ''));
     }, [formData.course]);
 
     const handleScoreChange = (index, value) => {
@@ -85,8 +71,6 @@ const EditGolfOuting = () => {
     if (!outingData) {
         return <div>Loading...</div>;
     }
-
-    console.log(formData.scores.length)
 
     return (
         <div className='edit-golf-outing-wrapper'>

@@ -9,7 +9,7 @@ import EditGolfCourseLink from './EditGolfCourseLink';
 import MapIconAndLink from './MapIconAndLink';
 import SortAndFilterOutings from './SortAndFilterOutings';
 import { fetchAllGolfCourses } from '../fetchFunctions/fetchAllGolfCourses';
-import { fetchCourseById } from '../fetchFunctions/fetchCourseById';
+import { fetchCourseFromQueryParamId } from '../fetchFunctions/fetchCourseFromQueryParamId';
 
 const ViewScoreCard = () => {
     const [golfCourses, setGolfCourses] = useState([]);
@@ -64,7 +64,7 @@ const ViewScoreCard = () => {
     }, [selectedCourse, fetchGolfOutings]); 
 
     useEffect(() => {
-        fetchCourseById().then(setSelectedCourse);
+        fetchCourseFromQueryParamId().then(setSelectedCourse);
     }, []);
 
     const handleSelectedCourseChange = (e) => {
