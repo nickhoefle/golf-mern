@@ -161,6 +161,11 @@ body {
   height: 100vh;
 }
 
+body.no-background {
+  background-image: none;
+  background-color: #fff; 
+}
+
 .cancel-golf-outing-button {
   font-size: 20px;
   margin: 20px 8px 0 0;
