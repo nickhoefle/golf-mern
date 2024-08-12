@@ -3,13 +3,13 @@ import React from 'react';
 const AddNewCourseLink = () => {
     return (
         <div 
-            className='add-new-course-link-wrapper'
+            className='link-to-add-golf-course-wrapper'
             onClick={
                 () => window.location.href = '/add-golf-course'
             }
         >
             <img
-                className='add-new-course-icon'
+                className='link-to-add-golf-course-icon'
                 src='/images/add.svg'
                 alt='add-new-golf-course'
             />

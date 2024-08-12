@@ -111,23 +111,6 @@ code {
   margin-top: 6px;
 }
 
-.add-new-course-icon {
-  height: 25px;
-  margin: 0 8px 0 12px;
-}
-
-.add-new-course-link-wrapper {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  cursor: pointer;
-  width: fit-content;
-}
-
-.add-new-course-link-wrapper:hover {
-  text-decoration: underline;
-}
-
 .add-outing-button {
   font-size: 20px;
   margin-top: 20px;
@@ -385,6 +368,23 @@ body.no-background {
 
 .index-content-wrapper {
   display: flex;
+}
+
+.link-to-add-golf-course-icon {
+  height: 25px;
+  margin: 0 8px 0 12px;
+}
+
+.link-to-add-golf-course-wrapper {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  cursor: pointer;
+  width: fit-content;
+}
+
+.link-to-add-golf-course-wrapper:hover {
+  text-decoration: underline;
 }
 
 .map-icon-and-address-wrapper {
