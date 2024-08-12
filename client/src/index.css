@@ -79,21 +79,6 @@ code {
   font-weight: bold;
 }
 
-.add-golf-outing-button {
-  font-size: 20px;
-  margin-top: 20px;
-  outline: 1px solid black;
-  padding: 8px;
-  border-radius: 5px;
-  background-color: white;
-  font-weight: bold;
-  cursor: pointer;
-}
-
-.add-golf-outing-button:hover {
-  background-color: rgb(226, 223, 223);
-}
-
 .add-edit-teebox-color-dropdown {
   width: 217.5px;
   font-size: 20px;
@@ -143,9 +128,39 @@ code {
   text-decoration: underline;
 }
 
+.add-outing-button {
+  font-size: 20px;
+  margin-top: 20px;
+  outline: 1px solid black;
+  padding: 8px;
+  border-radius: 5px;
+  background-color: white;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.add-outing-button:hover {
+  background-color: rgb(226, 223, 223);
+}
+
 .add-outing-calendar {
   width: 150px; 
   font-size: 16px;
+}
+
+.add-outing-cancel-button {
+  font-size: 20px;
+  margin: 20px 8px 0 0;
+  outline: 1px solid black;
+  padding: 8px;
+  border-radius: 5px;
+  background-color: #f78282;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.add-outing-cancel-button:hover {
+  background-color: #d46f6f;
 }
 
 .add-outing-email-date-cell {
@@ -158,6 +173,21 @@ code {
   width: 37.5px; 
   font-size: 18px; 
   text-align: center;
+}
+
+.add-outing-submit-button {
+  font-size: 20px;
+  margin-top: 20px;
+  outline: 1px solid black;
+  padding: 8px;
+  border-radius: 5px;
+  background-color: #44d16c;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.add-outing-submit-button:hover {
+  background-color: #38ae5a;
 }
 
 .add-teebox-button {
@@ -213,21 +243,6 @@ body {
 body.no-background {
   background-image: none;
   background-color: #fff; 
-}
-
-.cancel-golf-outing-button {
-  font-size: 20px;
-  margin: 20px 8px 0 0;
-  outline: 1px solid black;
-  padding: 8px;
-  border-radius: 5px;
-  background-color: #f78282;
-  font-weight: bold;
-  cursor: pointer;
-}
-
-.cancel-golf-outing-button:hover {
-  background-color: #d46f6f;
 }
 
 .delete-outing-icon {
@@ -608,21 +623,6 @@ body.no-background {
 }
 
 .submit-button:hover {
-  background-color: #38ae5a;
-}
-
-.submit-golf-outing-button {
-  font-size: 20px;
-  margin-top: 20px;
-  outline: 1px solid black;
-  padding: 8px;
-  border-radius: 5px;
-  background-color: #44d16c;
-  font-weight: bold;
-  cursor: pointer;
-}
-
-.submit-golf-outing-button:hover {
   background-color: #38ae5a;
 }
 

@@ -26,11 +26,11 @@ const AddGolfOuting = ({ selectedCourse, outingAddedOrDeletedListener, addingOut
         setOutingDate(e.target.value);
     };
 
-    const handleFinishedClick = async () => {
+    const handleSubmit = async () => {
         
-        const parsedScores = scores.map(score => parseInt(score));
+        const numericScores = scores.map(score => parseInt(score));
         
-        for (const [index, score] of parsedScores.entries()) {
+        for (const [index, score] of numericScores.entries()) {
             if (score > 15) {
                 const holeNumber = index + 1;
                 const confirmed = window.confirm(`Your score for Hole ${holeNumber} seems high. Proceed?`);
@@ -43,16 +43,15 @@ const AddGolfOuting = ({ selectedCourse, outingAddedOrDeletedListener, addingOut
         const outingData = {
             user: user,
             course: selectedCourse,
-            scores: parsedScores,
+            scores: numericScores,
             date: outingDate, 
         };
 
         try {
                 const response = await axios.post('/api/golf-outings', outingData, {
-                    headers: {
-                        'Content-Type': 'application/json'
-                    }
+                    headers: { 'Content-Type': 'application/json' }
                 });
+                
                 outingAddedOrDeletedListener();
                 setAddingOuting(false);
                 setScores([]);
@@ -95,7 +94,7 @@ const AddGolfOuting = ({ selectedCourse, outingAddedOrDeletedListener, addingOut
             {!addingOuting && selectedCourse && 
                 <button 
                     onClick={handleAddOutingButtonClick} 
-                    className='add-golf-outing-button'
+                    className='add-outing-button'
                 >
                     Add Golf Outing
                 </button>
@@ -104,7 +103,7 @@ const AddGolfOuting = ({ selectedCourse, outingAddedOrDeletedListener, addingOut
             {addingOuting && 
                 <button 
                     onClick={handleAddOutingButtonClick} 
-                    className='cancel-golf-outing-button'
+                    className='add-outing-cancel-button'
                 >
                     Cancel
                 </button>
@@ -112,8 +111,8 @@ const AddGolfOuting = ({ selectedCourse, outingAddedOrDeletedListener, addingOut
 
             {addingOuting && 
                 <button 
-                    onClick={handleFinishedClick} 
-                    className='submit-golf-outing-button'
+                    onClick={handleSubmit} 
+                    className='add-outing-submit-button'
                 >
                     Submit
                 </button>
