@@ -12,7 +12,7 @@ import EditGolfOuting from './Components/EditGolfOuting';
 
 const App = () => {
     const [user, loading, error] = useAuthState(auth);
-    const location = useLocation(); // Access the current route
+    const location = useLocation();
 
     useEffect(() => {
         if (location.pathname === '/') {
@@ -20,7 +20,7 @@ const App = () => {
         } else {
             document.body.classList.remove('no-background');
         }
-    }, [location]); // Re-run this effect whenever the route changes
+    }, [location]); 
 
     if (loading) {
         return <div>Loading...</div>;

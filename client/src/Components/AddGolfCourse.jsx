@@ -19,19 +19,19 @@ function AddGolfCourse() {
             alert('Please enter an address for the course.');
             return;
         } else if (!holes) {
-            alert('Please specify the amount of holes for the course.');
+            alert('Please specify the amount of holes at the course.');
             return;
         } else if (!pars || pars.some(par => par === '')) {
-            alert('Please fill out all par values for the course.');
+            alert('Please enter the par for every hole at the course.');
             return;
         } else if (!amountOfTeeBoxes) {
-            alert('Please specify the amount of tee boxes.');
+            alert('Please specify the amount of tee boxes at the course.');
             return;
         } else if (teeBoxDetails.some(teeBox => teeBox.color === '')) {
-            alert('Specify colors for tee boxes.');
+            alert('Please specify the color for every tee box.');
             return;
         } else if (teeBoxDetails.some(teeBox => teeBox.yardages.some(yardage => yardage === ''))) {
-            alert('Specify yardages for all holes.');
+            alert('Please specify yardages for all holes.');
             return;
         }
 
@@ -89,21 +89,21 @@ function AddGolfCourse() {
                 <h1>Add New Golf Course</h1>
                 <label>Name:</label>
                 <input
-                    className='course-name-input'
+                    className='add-golf-course-name-input'
                     type="text"
                     value={name}
                     onChange={(e) => setName(e.target.value)}
                 />
                 <label>Address:</label>
                 <input
-                    className='course-address-input'
+                    className='add-golf-course-address-input'
                     type="text"
                     value={address}
                     onChange={(e) => setAddress(e.target.value)}
                 />
                 <label>Holes:</label>
                 <select
-                    className='holes-dropdown'
+                    className='add-golf-course-holes-dropdown'
                     value={holes}
                     onChange={(e) => setHoles(e.target.value)}
                 >
@@ -116,13 +116,13 @@ function AddGolfCourse() {
                         {Array.from({ length: parseInt(holes) }).map((_, holeIndex) => (
                             <div 
                                 key={holeIndex} 
-                                className='hole-par-line'
+                                className='add-golf-course-hole-par-line'
                             >
                                 <label style={{ marginRight: holeIndex < 9 ? '20px' : '8px' }}>
                                     Hole {holeIndex + 1} Par:
                                 </label>
                                 <input
-                                    className='par-input'
+                                    className='add-golf-course-par-input'
                                     type="number"
                                     min={3}
                                     max={5}
@@ -131,9 +131,9 @@ function AddGolfCourse() {
                                 />
                             </div>
                         ))}
-                        <label className='amount-of-teeboxes-label'>Tee Boxes:</label>
+                        <label className='add-golf-course-amount-of-teeboxes-label'>Tee Boxes:</label>
                         <select
-                            className='amount-of-teeboxes-dropdown'
+                            className='add-golf-course-amount-of-teeboxes-dropdown'
                             value={amountOfTeeBoxes}
                             onChange={handleTeeBoxAmountChange}
                         >
@@ -153,7 +153,7 @@ function AddGolfCourse() {
                         >
                             <label>Tee Box {index + 1} Color:</label>
                             <select
-                                className='teebox-color-dropdown'
+                                className='add-edit-teebox-color-dropdown'
                                 value={teeBoxDetails[index]?.color || ''}
                                 onChange={(e) => handleTeeBoxDetailChange(index, 'color', e.target.value)}
                             >
@@ -173,7 +173,7 @@ function AddGolfCourse() {
                             {Array.from({ length: parseInt(holes) }).map((_, holeIndex) => (
                                 <div 
                                     key={holeIndex} 
-                                    className='yardage-label-and-input'
+                                    className='add-edit-yardage-label-and-input-wrapper'
                                 >
                                     <label 
                                         style={{ marginRight: holeIndex < 9 ? '15px' : '3.5px' }}
@@ -181,7 +181,7 @@ function AddGolfCourse() {
                                         Hole {holeIndex + 1} Yards: 
                                     </label>
                                     <input
-                                        className='yardage-input'
+                                        className='add-edit-yardage-input'
                                         type="number"
                                         value={teeBoxDetails[index]?.yardages[holeIndex] || ''}
                                         onChange={(e) => handleTeeBoxDetailChange(index, holeIndex, e.target.value)}

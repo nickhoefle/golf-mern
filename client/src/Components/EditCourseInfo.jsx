@@ -130,7 +130,7 @@ const EditCourseInfo = () => {
                             >
                                 <label>Tee Box #{index +1}</label>
                                 <select
-                                    className='teebox-color-dropdown'
+                                    className='add-edit-teebox-color-dropdown'
                                     value={teeBox.color}
                                     onChange={(e) => {
                                         const newTeeBoxColor = [...formData.teeBoxes];
@@ -152,14 +152,14 @@ const EditCourseInfo = () => {
                                     <option value="Pink">Pink</option>
                                 </select>
                                 {teeBox.yardages.map((yardage, holeIndex) => (
-                                    <div className='yardage-label-and-input'>
+                                    <div className='add-edit-yardage-label-and-input-wrapper'>
                                         <label 
                                             style={{ marginRight: holeIndex < 9 ? '15px' : '3.5px' }}
                                         >
                                             Hole {holeIndex + 1} Yards: 
                                         </label>
                                         <input
-                                            className='yardage-input'
+                                            className='add-edit-yardage-input'
                                             required
                                             type='number'
                                             key={holeIndex}

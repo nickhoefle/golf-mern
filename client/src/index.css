@@ -12,6 +12,47 @@ code {
     monospace;
 }
 
+.add-golf-course-amount-of-teeboxes-dropdown {
+  width: 250px;
+  font-size: 20px;
+  border: 2px solid black;
+  border-radius: 5px;
+  padding: 5px;
+}
+
+.add-golf-course-amount-of-teeboxes-label {
+  margin-top: 12px;
+}
+
+.add-golf-course-hole-par-line {
+  margin-top: 12px;
+}
+
+.add-golf-course-holes-dropdown {
+  width: 215px;
+  font-size: 20px;
+  border: 2px solid black;
+  border-radius: 5px;
+  padding: 5px;
+}
+
+.add-golf-course-name-input,
+.add-golf-course-address-input {
+  width: 60%;
+  font-size: 20px;
+  border: 2px solid black;
+  border-radius: 5px;
+  padding: 5px;
+}
+
+.add-golf-course-par-input {
+  width: 50px;
+  font-size: 20px;
+  border: 2px solid black;
+  border-radius: 5px;
+  padding: 5px;
+}
+
 .add-golf-course-wrapper {
   display: flex;
   justify-content: center;
@@ -53,6 +94,14 @@ code {
   background-color: rgb(226, 223, 223);
 }
 
+.add-edit-teebox-color-dropdown {
+  width: 217.5px;
+  font-size: 20px;
+  border: 2px solid black;
+  border-radius: 5px;
+  padding: 5px;
+}
+
 .add-edit-teebox-section {
   display: flex;
   flex-direction: column;
@@ -63,6 +112,18 @@ code {
 .add-edit-teebox-section-wrapper {
   display: flex;
   justify-content: center;
+}
+
+.add-edit-yardage-input {
+  width: 65px;
+  font-size: 20px;
+  border: 2px solid black;
+  border-radius: 5px;
+  padding: 5px;
+}
+
+.add-edit-yardage-label-and-input-wrapper {
+  margin-top: 6px;
 }
 
 .add-new-course-icon {
@@ -122,18 +183,6 @@ code {
   width: 100%;
 }
 
-.amount-of-teeboxes-label {
-  margin-top: 12px;
-}
-
-.amount-of-teeboxes-dropdown {
-  width: 250px;
-  font-size: 20px;
-  border: 2px solid black;
-  border-radius: 5px;
-  padding: 5px;
-}
-
 .auth-info-text {
   font-size: 18px;
   margin: 10px 0 10px 0;
@@ -179,15 +228,6 @@ body.no-background {
 
 .cancel-golf-outing-button:hover {
   background-color: #d46f6f;
-}
-
-.course-name-input,
-.course-address-input {
-  width: 60%;
-  font-size: 20px;
-  border: 2px solid black;
-  border-radius: 5px;
-  padding: 5px;
 }
 
 .delete-outing-icon {
@@ -328,18 +368,6 @@ body.no-background {
   padding: 5px;
 }
 
-.hole-par-line {
-  margin-top: 12px;
-}
-
-.holes-dropdown {
-  width: 215px;
-  font-size: 20px;
-  border: 2px solid black;
-  border-radius: 5px;
-  padding: 5px;
-}
-
 .index-content-wrapper {
   display: flex;
 }
@@ -448,14 +476,6 @@ body.no-background {
   text-align: center;
   background-color: white;
   border-bottom: 5px solid black;
-}
-
-.par-input {
-  width: 50px;
-  font-size: 20px;
-  border: 2px solid black;
-  border-radius: 5px;
-  padding: 5px;
 }
 
 .scorecard-table td, th {
@@ -669,14 +689,6 @@ body.no-background {
   margin: 1px;
 }
 
-.teebox-color-dropdown {
-  width: 217.5px;
-  font-size: 20px;
-  border: 2px solid black;
-  border-radius: 5px;
-  padding: 5px;
-}
-
 .two-criteria-row {
   display: flex;
   width: 420px;
@@ -701,16 +713,4 @@ body.no-background {
 .view-course-info-wrapper label {
   font-size: 24px;
   font-weight: bold;
-}
-
-.yardage-input {
-  width: 65px;
-  font-size: 20px;
-  border: 2px solid black;
-  border-radius: 5px;
-  padding: 5px;
-}
-
-.yardage-label-and-input {
-  margin-top: 6px;
 }
