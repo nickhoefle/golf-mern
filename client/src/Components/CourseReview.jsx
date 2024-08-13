@@ -34,6 +34,7 @@ const CourseReview = ({ course }) => {
     useEffect(() => {
         fetchCourseReviewDataForUser(course._id, user)
             .then(data => setReviewData(data))
+            .catch(error => console.error('Error setting review data:', error));
     }, [course._id, user]);
 
     const handleRatingChange = (newRating, ratingCategory) => {
@@ -46,10 +47,8 @@ const CourseReview = ({ course }) => {
         try {
             if (updatedReviewData._id) {
                 await axios.put(`/api/course-reviews/${updatedReviewData._id}`, updatedReviewData);
-                console.log('Review updated successfully');
             } else {
                 const response = await axios.post('/api/course-reviews', updatedReviewData);
-                console.log('Review submitted successfully:', response.data);
                 setReviewData({ ...response.data, _id: response.data._id });
             }
         } catch (error) {

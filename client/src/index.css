@@ -544,6 +544,7 @@ body.no-background {
   background-color: white;
   border-left: 5px solid black;
   width: 25%;
+  height: calc(100vh - 57px);
 }
 
 .sidebar-wrapper h1, 
